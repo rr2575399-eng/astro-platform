@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ishubhamx/panchangam-js": "^3.0.0",
+    "@react-pdf/renderer": "^4.9.0",
     "next": "16.3.1",
     "react": "19.2.8",
     "react-dom": "19.2.8"

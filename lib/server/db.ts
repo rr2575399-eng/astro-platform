@@ -36,3 +36,34 @@ export async function select(table: string, filters: Record<string, string>, lim
   const res = await request(`${table}?select=*&${query}&limit=${limit}`);
   return await res.json() as Row[];
 }
+export async function uploadStorage(
+  bucket: string,
+  path: string,
+  file: Buffer,
+  contentType: string
+) {
+  const { url, key } = config();
+
+  const res = await fetch(
+    `${url}/storage/v1/object/${bucket}/${path}`,
+    {
+      method: "POST",
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        "Content-Type": contentType,
+        "x-upsert": "true",
+      },
+      body: new Uint8Array(file),
+      cache: "no-store",
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error(
+      `Storage upload failed (${res.status}): ${await res.text()}`
+    );
+  }
+
+  return await res.json();
+}
