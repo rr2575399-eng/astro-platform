@@ -8,7 +8,7 @@ export async function POST(req: Request) {
   try {
     // 1. Authentication
     const jobSecret = process.env.JOB_SECRET;
-    const cronSecret = process.env.CRON__SECRET;
+    const cronSecret = process.env.CRON_SECRET;
 
     if (!jobSecret && !cronSecret) {
       return NextResponse.json(
