@@ -24,6 +24,19 @@ export async function POST(req: Request) {
         await update("orders", { id: String(order.id) }, { payment_status: "PAID", status: "CALCULATION_PENDING", gateway_payment_id: paymentId, updated_at: new Date().toISOString() });
         await insert("payments", { order_id: order.id, gateway: "razorpay", gateway_order_id: gatewayOrderId, gateway_payment_id: paymentId, amount_inr: order.amount_inr, status: "PAID", webhook_event_id: eventId, raw_event: event });
         await insert("job_queue", { job_type: "PROCESS_PAID_ORDER", order_id: order.id });
+        try {
+  const workerUrl = `${process.env.APP_URL}/api/jobs/process`;
+
+  await fetch(workerUrl, {
+    method: "POST",
+    headers: {
+      "x-job-secret": process.env.JOB_SECRET || "",
+    },
+    cache: "no-store",
+  });
+} catch (error) {
+  console.error("Automatic worker trigger failed:", error);
+}
       }
     }
   }
