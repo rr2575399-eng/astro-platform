@@ -2,6 +2,7 @@ import { BirthDetailsDraft } from "@/types";
 import {
   getKundli,
   getAyanamsa,
+  getPanchangam,
 } from "@ishubhamx/panchangam-js";
 
 /* =========================================================
@@ -27,6 +28,11 @@ export interface DashaPeriod {
   planet: string;
   startDate: string;
   endDate: string;
+  level:
+    | "MAHADASHA"
+    | "ANTARDASHA"
+    | "PRATYANTARDASHA";
+  parentPlanet?: string;
 }
 
 export interface AstrologyCalculation {
@@ -67,6 +73,25 @@ function safeNumber(value: unknown, fallback = 0): number {
   const n = Number(value);
 
   return Number.isFinite(n) ? n : fallback;
+}
+
+/* =========================================================
+   REQUIRED NUMBER
+========================================================= */
+
+function requiredNumber(
+  value: unknown,
+  fieldName: string
+): number {
+  const n = Number(value);
+
+  if (!Number.isFinite(n)) {
+    throw new Error(
+      `${fieldName} is required and must be a valid number`
+    );
+  }
+
+  return n;
 }
 
 /* =========================================================
@@ -320,6 +345,8 @@ export async function calculateChart(
   birthDetails: BirthDetailsDraft
 ): Promise<AstrologyCalculation> {
 
+  console.log("🔥 CALCULATE CHART FUNCTION CALLED");
+
   /* =======================================================
      1. VALIDATE
   ======================================================= */
@@ -344,13 +371,15 @@ export async function calculateChart(
 
   const data = birthDetails as any;
 
-  const latitude = safeNumber(
-    data.latitude
-  );
+  const latitude = requiredNumber(
+  data.latitude,
+  "Birth latitude"
+);
 
-  const longitude = safeNumber(
-    data.longitude
-  );
+const longitude = requiredNumber(
+  data.longitude,
+  "Birth longitude"
+);
 
   if (
     !Number.isFinite(latitude) ||
@@ -714,53 +743,32 @@ export async function calculateChart(
     }
   }
 
-  /* =======================================================
-     11. DASHA
+  /* /* =======================================================
+   11. VIMSHOTTARI DASHA
+======================================================= */
 
-     Always return DashaPeriod[]
-     Never return null
-  ======================================================= */
+const panchangam: any =
+  (getPanchangam as any)(
+    date,
+    observer,
+    {
+      timezoneOffset: 330,
+    }
+  );
 
-  const dashas: DashaPeriod[] =
-    [];
+const vimshottari =
+  panchangam?.vimshottariDasha;
 
-  const dashaRaw =
-    kundli?.dasha;
+console.log(
+  "VIMSHOTTARI DASHA:",
+  JSON.stringify(
+    vimshottari,
+    null,
+    2
+  )
+);
 
-  if (
-    Array.isArray(
-      dashaRaw
-    )
-  ) {
-
-    dashaRaw.forEach(
-      (item: any) => {
-
-        dashas.push({
-          planet:
-            safeString(
-              item?.planet ??
-                item?.name ??
-                item?.lord
-            ),
-
-          startDate:
-            safeString(
-              item?.startDate ??
-                item?.start ??
-                ""
-            ),
-
-          endDate:
-            safeString(
-              item?.endDate ??
-                item?.end ??
-                ""
-            ),
-        });
-      }
-    );
-  }
+const dashas: DashaPeriod[] = [];
 
   /* =======================================================
      12. FINAL RESULT
