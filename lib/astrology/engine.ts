@@ -3,6 +3,7 @@ import {
   getKundli,
   getAyanamsa,
   getPanchangam,
+  Observer,
 } from "@ishubhamx/panchangam-js";
 
 /* =========================================================
@@ -414,11 +415,11 @@ const longitude = requiredNumber(
      height is REQUIRED
   ======================================================= */
 
-  const observer: any = {
+  const observer = new Observer(
     latitude,
     longitude,
-    height: 0,
-  };
+     0,
+  );
 
   /* =======================================================
      5. AYANAMSA
