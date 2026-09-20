@@ -768,8 +768,34 @@ console.log(
     2
   )
 );
+console.log(
+  "VIMSHOTTARI KEYS:",
+  Object.keys(vimshottari || {})
+);
+
+console.log(
+  "VIMSHOTTARI FULL OBJECT:",
+  JSON.stringify(vimshottari, null, 2)
+);
 
 const dashas: DashaPeriod[] = [];
+
+if (Array.isArray(vimshottari?.fullCycle)) {
+  for (const period of vimshottari.fullCycle) {
+    if (
+      period?.planet &&
+      period?.startTime &&
+      period?.endTime
+    ) {
+      dashas.push({
+        planet: String(period.planet),
+        startDate: String(period.startTime),
+        endDate: String(period.endTime),
+        level: "MAHADASHA",
+      });
+    }
+  }
+}
 
   /* =======================================================
      12. FINAL RESULT
