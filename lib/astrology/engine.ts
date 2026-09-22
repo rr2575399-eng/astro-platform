@@ -347,6 +347,93 @@ export async function calculateChart(
 ): Promise<AstrologyCalculation> {
 
   console.log("🔥 CALCULATE CHART FUNCTION CALLED");
+  const VIMSHOTTARI_ORDER = [
+  "Ketu",
+  "Venus",
+  "Sun",
+  "Moon",
+  "Mars",
+  "Rahu",
+  "Jupiter",
+  "Saturn",
+  "Mercury",
+] as const;
+
+const VIMSHOTTARI_YEARS: Record<string, number> = {
+  Ketu: 7,
+  Venus: 20,
+  Sun: 6,
+  Moon: 10,
+  Mars: 7,
+  Rahu: 18,
+  Jupiter: 16,
+  Saturn: 19,
+  Mercury: 17,
+};
+
+function getAntardashaPeriods(
+  mahadashaPlanet: string,
+  startTime: string,
+  endTime: string
+): DashaPeriod[] {
+  const mdStart = new Date(startTime).getTime();
+  const mdEnd = new Date(endTime).getTime();
+
+  if (
+    !Number.isFinite(mdStart) ||
+    !Number.isFinite(mdEnd) ||
+    mdEnd <= mdStart
+  ) {
+    return [];
+  }
+
+  const mdDuration = mdEnd - mdStart;
+
+  const startIndex =
+    VIMSHOTTARI_ORDER.indexOf(
+      mahadashaPlanet as (typeof VIMSHOTTARI_ORDER)[number]
+    );
+
+  if (startIndex < 0) {
+    return [];
+  }
+
+  const totalYears = 120;
+  const result: DashaPeriod[] = [];
+
+  let currentStart = mdStart;
+
+  for (let i = 0; i < VIMSHOTTARI_ORDER.length; i++) {
+    const antardashaPlanet =
+      VIMSHOTTARI_ORDER[
+        (startIndex + i) % VIMSHOTTARI_ORDER.length
+      ];
+
+    const antardashaYears =
+      VIMSHOTTARI_YEARS[antardashaPlanet];
+
+    const duration =
+      mdDuration *
+      (antardashaYears / totalYears);
+
+    const currentEnd =
+      i === VIMSHOTTARI_ORDER.length - 1
+        ? mdEnd
+        : currentStart + duration;
+
+    result.push({
+      planet: antardashaPlanet,
+      startDate: new Date(currentStart).toISOString(),
+      endDate: new Date(currentEnd).toISOString(),
+      level: "ANTARDASHA",
+      parentPlanet: mahadashaPlanet,
+    });
+
+    currentStart = currentEnd;
+  }
+
+  return result;
+}
 
   /* =======================================================
      1. VALIDATE
@@ -450,6 +537,14 @@ const longitude = requiredNumber(
       }
     );
 
+    console.log("========== KUNDLI RAW ==========");
+console.log(JSON.stringify(kundli, null, 2));
+console.log("========== KUNDLI PLANETS ==========");
+console.log(JSON.stringify(kundli?.planets, null, 2));
+console.log("========== KUNDLI HOUSES ==========");
+console.log(JSON.stringify(kundli?.houses, null, 2));
+console.log("========== KUNDLI ASCENDANT ==========");
+console.log(JSON.stringify(kundli?.ascendant, null, 2));
   /* =======================================================
      7. ASCENDANT
   ======================================================= */
@@ -787,15 +882,72 @@ if (Array.isArray(vimshottari?.fullCycle)) {
       period?.startTime &&
       period?.endTime
     ) {
+      const mahadashaPlanet = String(period.planet);
+      const startDate = String(period.startTime);
+      const endDate = String(period.endTime);
+
+      // Mahadasha
       dashas.push({
-        planet: String(period.planet),
-        startDate: String(period.startTime),
-        endDate: String(period.endTime),
+        planet: mahadashaPlanet,
+        startDate,
+        endDate,
         level: "MAHADASHA",
       });
+
+      // Antardashas inside this Mahadasha
+      const antardashas = getAntardashaPeriods(
+        mahadashaPlanet,
+        startDate,
+        endDate
+      );
+
+      dashas.push(...antardashas);
     }
   }
 }
+const currentDate = new Date();
+
+const currentMahadasha = dashas.find((d) => {
+  if (d.level !== "MAHADASHA") return false;
+
+  const start = new Date(d.startDate).getTime();
+  const end = new Date(d.endDate).getTime();
+
+  return (
+    currentDate.getTime() >= start &&
+    currentDate.getTime() < end
+  );
+});
+
+const currentAntardasha = dashas.find((d) => {
+  if (d.level !== "ANTARDASHA") return false;
+
+  const start = new Date(d.startDate).getTime();
+  const end = new Date(d.endDate).getTime();
+
+  return (
+    currentDate.getTime() >= start &&
+    currentDate.getTime() < end
+  );
+});
+
+console.log(
+  "CURRENT MAHADASHA:",
+  JSON.stringify(
+    currentMahadasha,
+    null,
+    2
+  )
+);
+
+console.log(
+  "CURRENT ANTARDASHA:",
+  JSON.stringify(
+    currentAntardasha,
+    null,
+    2
+  )
+);
 
   /* =======================================================
      12. FINAL RESULT
