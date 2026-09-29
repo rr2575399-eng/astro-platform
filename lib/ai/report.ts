@@ -28,6 +28,8 @@ export async function generateReport(
       ? input
       : JSON.stringify(input, null, 2);
 
+      console.log("========== AI INPUT ASTROLOGY ==========");
+      console.log(inputText);
   // --------------------------------------------------------
   // RETRY LOGIC — 3 attempts
   // --------------------------------------------------------

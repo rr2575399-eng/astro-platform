@@ -44,7 +44,13 @@ export interface AstrologyCalculation {
   planets: PlanetPosition[];
   houses: HousePosition[];
   dashas: DashaPeriod[];
+  currentMahadasha?: DashaPeriod;
+  currentAntardasha?: DashaPeriod;
   ayanamsa?: number;
+
+  // Varga charts
+  d9?: any;
+  d10?: any;
 }
 
 /* =========================================================
@@ -155,7 +161,11 @@ function createBirthDate(birth: BirthDetailsDraft): Date {
   }
 
   // Accept either dob or date
- const rawDate = String(birth.dob ?? "").trim();
+ const rawDate = String(
+  birth.dob ??
+  (birth as any).date ??
+  ""
+).trim();
 
   if (!rawDate) {
     throw new Error("Birth date is required");
@@ -948,19 +958,44 @@ console.log(
     2
   )
 );
+console.log(
+  "CURRENT DASHA SUMMARY:",
+  JSON.stringify(
+    {
+      mahadasha: currentMahadasha?.planet,
+      mahadashaStart: currentMahadasha?.startDate,
+      mahadashaEnd: currentMahadasha?.endDate,
+      antardasha: currentAntardasha?.planet,
+      antardashaStart: currentAntardasha?.startDate,
+      antardashaEnd: currentAntardasha?.endDate,
+    },
+    null,
+    2
+  )
+);
 
   /* =======================================================
      12. FINAL RESULT
   ======================================================= */
+console.log("========== D9 NAVAMSA ==========");
+console.log(JSON.stringify(kundli?.vargas?.d9, null, 2));
 
-  return {
-    ascendant,
-    moonSign,
-    nakshatra,
-    pada,
-    planets,
-    houses,
-    dashas,
-    ayanamsa,
-  };
+console.log("========== D10 DASAMSA ==========");
+console.log(JSON.stringify(kundli?.vargas?.d10, null, 2));
+
+return {
+  ascendant,
+  moonSign,
+  nakshatra,
+  pada,
+  planets,
+  houses,
+  dashas,
+  currentMahadasha,
+  currentAntardasha,
+  ayanamsa,
+
+  d9: kundli?.vargas?.d9,
+  d10: kundli?.vargas?.d10,
+};
 }
