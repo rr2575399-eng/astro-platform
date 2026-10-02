@@ -1452,80 +1452,382 @@ Target:
 சுமார் 13–18 meaningful pages.
 `,
 
-  "complete-life-report": `
-இது COMPLETE LIFE REPORT.
+  "complete-life": `
+Create a premium Complete Life Astrology Report.
 
-இது PREMIUM / MOST COMPREHENSIVE report.
+This service is the most comprehensive report offered by the platform.
+The customer should feel that the report studies their major life areas
+together, rather than giving separate generic astrology paragraphs.
 
-முக்கிய நோக்கம்:
+==================================================
+COMPLETE LIFE REPORT OBJECTIVE
+==================================================
 
-Customer-ன் available astrology calculation data-ஐ
-ஒருங்கிணைத்து ஒரு deep personalized life analysis
-உருவாக்க வேண்டும்.
+The report must provide a personalized life roadmap using ONLY the
+supplied astrology calculation data.
 
-Report generic horoscope போல இருக்கக்கூடாது.
+The report should cover:
 
-Relevant data இருந்தால்:
+1. Personal nature and life direction
+2. Full 12-house life analysis
+3. Education and learning
+4. Career and employment
+5. Business and entrepreneurship
+6. Income and financial patterns
+7. Property / house / land
+8. Marriage and relationships
+9. Family and important relationships
+10. Major strengths
+11. Important challenges
+12. Dasha / Antardasha life-period analysis
+13. D9 / Navamsa when supplied
+14. D10 / Dasamsa when supplied
+15. Customer's exact questions
+16. Practical life guidance
+17. Final personalized life roadmap
 
-1. Complete birth details
-2. Lagna
-3. Rasi
-4. Nakshatra
-5. Pada
-6. Planetary positions
-7. 12 houses
-8. House lords
-9. Relevant combinations
-10. Vimshottari Mahadasha
-11. Antardasha / Bhukti
-12. Pratyantardasha
-13. D9 / Navamsa
-14. D10 / Dasamsa
-15. Other available Vargas
-16. Customer's exact question
+Do not add a section merely to increase page count.
 
-Detailed life areas:
+==================================================
+1. PERSONAL OVERVIEW
+==================================================
 
-- Personality
-- Education
-- Career
-- Business
-- Finance
-- Property
-- Marriage
-- Relationship
-- Family
-- Children
-- Major life periods
-- Strengths
-- Challenges
-- Practical guidance
+Explain:
+- Lagna
+- Rasi
+- Nakshatra / Pada
+- important supplied planetary themes
+- personality tendencies
+- strengths
+- challenges
+- general life direction
 
-D9:
-Marriage / relationship / relevant deeper themes-க்கு
-available data அடிப்படையில் பயன்படுத்தவும்.
+Do not make unsupported psychological or medical claims.
 
-D10:
-Career / profession / professional growth-க்கு
-available data அடிப்படையில் பயன்படுத்தவும்.
+==================================================
+2. FULL 12-HOUSE ANALYSIS
+==================================================
 
-Dasha + Antardasha:
-Relevant life themes மற்றும் timing-ஐ connect செய்யவும்.
+Analyze all 12 houses when sufficient supplied data exists.
 
-ஒரே chart factor-ஐ பலமுறை repeat செய்யக்கூடாது.
+For each house explain:
 
-Conflicting indications இருந்தால் அதை balanced-ஆக explain செய்யவும்.
+1. House number and life area
+2. Sign
+3. Planet(s) actually present, if any
+4. Relevant house lord when available
+5. Important supplied factors connected to the house
+6. Personalized interpretation
+7. Practical meaning where relevant
 
-Customer question-க்கு report-ல் தனியாக
-strong direct answer section இருக்க வேண்டும்.
+Cover:
 
-Page count-க்காக filler எழுதக்கூடாது.
+1st - personality and life direction
+2nd - family, speech and finances
+3rd - communication, skills and effort
+4th - home, property and comfort
+5th - education, creativity and children
+6th - employment, competition and service
+7th - marriage, relationships and partnership
+8th - transformation and uncertainty
+9th - higher learning, guidance and fortune
+10th - career and profession
+11th - income, gains and network
+12th - expenses, foreign connection and isolation
 
-Promotion / upsell இருந்தால் மிகச் சிறிய final section மட்டும்.
+Do not invent missing planets, aspects, yogas or strengths.
 
-Target:
-சுமார் 18–25 meaningful pages.
-`
+Do not write generic interpretations that are unsupported by the
+supplied chart.
+
+==================================================
+3. CAREER AND EMPLOYMENT
+==================================================
+
+Analyze career using relevant supplied factors such as:
+
+- 6th house
+- 6th lord
+- 10th house
+- 10th lord
+- 11th house
+- relevant planets
+- current Dasha / Antardasha
+- D10 when supplied
+
+Explain:
+
+- suitable work nature
+- career direction
+- job-related strengths
+- possible challenges
+- career development themes
+- job-change themes when supported
+- relevant timing when supported
+
+When suggesting career fields, explain the actual supplied chart
+factor behind each suggestion.
+
+Do not give a generic list of popular careers.
+
+==================================================
+4. BUSINESS AND ENTREPRENEURSHIP
+==================================================
+
+Analyze business using supplied relevant factors such as:
+
+- 7th house
+- 10th house
+- 11th house
+- relevant lords
+- relevant planets
+- Dasha / Antardasha
+- D10 when supplied
+
+Discuss:
+
+- independent business vs partnership themes
+- suitable work style
+- business responsibilities
+- possible challenges
+- preparation requirements
+- relevant periods when supported
+
+Never guarantee business success or profit.
+
+==================================================
+5. FINANCE AND WEALTH
+==================================================
+
+Analyze:
+
+- 2nd house
+- 2nd lord
+- 11th house
+- 11th lord
+- relevant planets
+- Dasha / Antardasha
+
+Discuss:
+
+- income themes
+- saving tendencies
+- expense patterns
+- financial discipline
+- wealth-building themes
+- relevant periods when supported
+
+Do not provide guaranteed investment returns.
+
+==================================================
+6. PROPERTY / HOUSE / LAND
+==================================================
+
+Analyze:
+
+- 4th house
+- 4th lord
+- relevant planets
+- Dasha / Antardasha
+- other supplied property-related factors
+
+If the customer asks when they may buy a house or property:
+
+Give:
+- current relevant period
+- relevant upcoming periods if supported
+- why each period is relevant
+- practical preparation
+- limitations of timing
+
+Do not invent an exact purchase date.
+
+Clearly distinguish astrology interpretation from legal,
+financial and property verification.
+
+==================================================
+7. MARRIAGE AND RELATIONSHIPS
+==================================================
+
+Analyze:
+
+- 7th house
+- 7th lord
+- Venus
+- Mars where relevant
+- relevant Dasha
+- D9 / Navamsa when supplied
+
+Discuss:
+
+- relationship tendencies
+- partnership themes
+- communication
+- supportive factors
+- possible challenges
+- timing only when supported
+
+Do not guarantee marriage success or failure.
+
+==================================================
+8. EDUCATION AND SKILLS
+==================================================
+
+Analyze:
+
+- 4th house
+- 5th house
+- relevant planets
+- Mercury / Jupiter where relevant
+- supplied Dasha factors
+
+Discuss:
+- learning style
+- education themes
+- skill-development direction
+- areas that may require extra effort
+
+Connect education to career where relevant.
+
+==================================================
+9. D9 / NAVAMSA
+==================================================
+
+Use D9 only if supplied.
+
+Do not merely list D9 placements.
+
+Explain relevant D9 factors and connect them with D1.
+
+Use D9 especially for:
+- marriage
+- relationship
+- deeper planetary context
+
+==================================================
+10. D10 / DASAMSA
+==================================================
+
+Use D10 only if supplied.
+
+Use it especially for:
+- career
+- profession
+- business
+- professional responsibilities
+
+Connect D10 findings with D1.
+
+Do not replace D1 with D10.
+
+==================================================
+11. LIFE-PERIOD ROADMAP
+==================================================
+
+Analyze the supplied Mahadasha and Antardasha information.
+
+Include:
+
+CURRENT PERIOD:
+- Mahadasha
+- Antardasha
+- dates
+- relevant life themes
+
+UPCOMING RELEVANT PERIODS:
+- only periods actually supplied
+- dates
+- relevant life area
+- chart factors supporting the interpretation
+
+Compare periods only when actual supplied data supports the comparison.
+
+Do not automatically call one period "best".
+
+Do not invent exact dates or transit information.
+
+==================================================
+12. CUSTOMER QUESTIONS
+==================================================
+
+The customer's exact questions have high priority.
+
+Answer each question separately.
+
+For each question:
+
+1. Restate the intended meaning in clear Tamil.
+2. Give a direct answer first.
+3. Explain the relevant chart factors.
+4. Explain the relevant Dasha / period.
+5. Mention upcoming relevant periods if supported.
+6. Give practical guidance.
+7. State timing limitations where necessary.
+
+Do not allow general life analysis to bury the customer's actual
+questions.
+
+==================================================
+13. PRACTICAL LIFE ROADMAP
+==================================================
+
+End with practical guidance connected to the actual report.
+
+Cover only relevant areas such as:
+
+- career
+- business
+- money
+- property
+- relationships
+- education
+- skill development
+
+Avoid generic advice such as:
+"Work hard and stay positive."
+
+==================================================
+14. FINAL PERSONALIZED ROADMAP
+==================================================
+
+Finish with a concise summary covering:
+
+- personality
+- career
+- business
+- finance
+- property
+- marriage
+- education
+- important current/upcoming periods
+- practical focus
+
+The customer should be able to understand the major themes of their
+life without rereading the entire report.
+
+==================================================
+15. PREMIUM QUALITY RULE
+==================================================
+
+The report should feel premium because of:
+
+- complete coverage
+- cross-checking
+- personalization
+- Dasha analysis
+- relevant D9/D10 analysis
+- customer-question focus
+- timing analysis
+- practical interpretation
+
+Never create filler paragraphs merely to make the report longer.
+
+Do not repeat the same planetary interpretation in multiple sections.
+
+Do not repeat the same Dasha explanation unnecessarily.
+
+Accuracy and personalization are more important than page count.
+`,
 };
 
 // ============================================================
