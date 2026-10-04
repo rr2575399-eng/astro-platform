@@ -1864,7 +1864,10 @@ export async function processPaidOrder(orderId: string) {
   if (!order) {
     throw new Error("Order not found");
   }
-
+console.log("========== ORDER SERVICE DEBUG ==========");
+console.log("ORDER ID:", order.id);
+console.log("SERVICE SLUG:", order.service_slug);
+console.log("ORDER NUMBER:", order.order_number);
   // ----------------------------------------------------------
   // 2. GET BIRTH DETAILS
   // ----------------------------------------------------------
@@ -1994,9 +1997,14 @@ console.log(JSON.stringify(chart.d10, null, 2));
   // 9. SERVICE SLUG
   // ----------------------------------------------------------
 
-  const serviceSlug = String(
-    order.service_slug ?? "basic-jathagam"
-  );
+const rawServiceSlug = String(
+  order.service_slug ?? "basic-jathagam"
+);
+
+const serviceSlug =
+  rawServiceSlug === "complete-life-report"
+    ? "complete-life"
+    : rawServiceSlug;
 
   // ----------------------------------------------------------
   // 10. FINAL AI PROMPT
