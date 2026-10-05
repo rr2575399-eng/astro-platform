@@ -1579,6 +1579,48 @@ Do not make unsupported psychological, medical or personality claims.
 
 Avoid repeating the same planet interpretation later unless it adds
 new meaning to a specific life area.
+==================================================
+HOUSE DATA SOURCE-OF-TRUTH
+==================================================
+
+For house placement, ALWAYS use the supplied D1 houses data
+as the primary source of truth.
+
+The houses array determines which planets are actually placed
+in each house.
+
+The planets array may be used to cross-check the planet's sign,
+degree and other supplied details.
+
+Do NOT infer or recalculate a planet's house from its sign or degree
+when the supplied houses array already provides the house placement.
+
+If the supplied houses data says:
+
+10th house → Ketu
+
+then Ketu MUST be treated as being in the 10th house.
+
+If houses and planets appear inconsistent:
+
+1. Prefer the explicit houses array for house placement.
+2. Prefer the planets array for planet sign and degree.
+3. Do not silently invent a correction.
+4. Keep the final report internally consistent.
+
+Before writing the 12-house analysis, cross-check every planet
+against the supplied houses array.
+
+The same house placement must be used consistently in:
+
+- 12-house analysis
+- career analysis
+- business analysis
+- finance analysis
+- property analysis
+- marriage analysis
+- Dasha interpretation
+- final summary
 
 ==================================================
 2. FULL 12-HOUSE ANALYSIS
