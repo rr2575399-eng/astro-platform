@@ -1494,6 +1494,72 @@ If a required factor is not supplied, clearly say that the factor
 cannot be assessed from the available data.
 
 ==================================================
+LANGUAGE RULE — TAMIL CUSTOMER REPORT
+==================================================
+
+The final customer-facing report MUST be written in clear,
+natural Tamil.
+
+Use Tamil script for:
+
+- headings
+- section names
+- planet names
+- Rasi names
+- Nakshatra names
+- house names
+- Dasha names
+- Antardasha names
+- career/business/finance/property/marriage explanations
+
+Do NOT unnecessarily use English words or English-letter
+transliterations in the customer-facing report.
+
+Examples:
+
+"Career Analysis" → "வேலை மற்றும் தொழில் ஆய்வு"
+
+"Finance" → "பணம் மற்றும் செல்வம்"
+
+"Property" → "சொத்து மற்றும் நிலம்"
+
+"Marriage" → "திருமணம் மற்றும் உறவுகள்"
+
+"House 10" → "10ஆம் வீடு"
+
+"Ketu" → "கேது"
+
+"Venus" → "சுக்கிரன்"
+
+"Jupiter" → "குரு"
+
+"Saturn" → "சனி"
+
+"Rahu" → "ராகு"
+
+"Moon" → "சந்திரன்"
+
+"Sun" → "சூரியன்"
+
+"Mercury" → "புதன்"
+
+"Mars" → "செவ்வாய்"
+
+Do not write mixed forms such as:
+
+"10th House – Ketu Career"
+
+Instead write:
+
+"10ஆம் வீடு – கேது மற்றும் தொழில் வாழ்க்கை"
+
+Numerals and actual dates may remain in standard numeric format
+when necessary.
+
+Do not output code, JSON, internal field names, variable names,
+service slugs, or technical system terminology.
+
+==================================================
 1. PERSONAL OVERVIEW
 ==================================================
 
@@ -1581,6 +1647,7 @@ Cover:
 10th — career and profession
 11th — income, gains and networks
 12th — expenses, foreign connections and isolation
+
 
 ==================================================
 3. EDUCATION AND SKILLS
@@ -2173,6 +2240,12 @@ console.log("ORDER NUMBER:", order.order_number);
   // ----------------------------------------------------------
 
   const chart = await calculateChart(birth);
+
+  console.log("========== TIMING DEBUG ==========");
+console.log("CURRENT MAHADASHA:", JSON.stringify(chart.currentMahadasha, null, 2));
+console.log("CURRENT ANTARDASHA:", JSON.stringify(chart.currentAntardasha, null, 2));
+console.log("ALL DASHAS:", JSON.stringify(chart.dashas, null, 2));
+
 console.log("========== CHART D9 ==========");
 console.log(JSON.stringify(chart.d9, null, 2));
 
