@@ -35,22 +35,127 @@ export interface DashaPeriod {
     | "PRATYANTARDASHA";
   parentPlanet?: string;
 }
+export interface FiveYearTimingPeriod {
+  year: number;
+  startDate: string;
+  endDate: string;
+  mahadasha?: string;
+  antardasha?: string;
+  pratyantarDasha?: string;
+}
+
+export function buildFiveYearTiming(
+  dashas: DashaPeriod[],
+  fromDate: Date = new Date()
+): FiveYearTimingPeriod[] {
+  const result: FiveYearTimingPeriod[] = [];
+
+  const startTime = fromDate.getTime();
+
+  const endDate = new Date(fromDate);
+  endDate.setFullYear(endDate.getFullYear() + 5);
+
+  const endTime = endDate.getTime();
+
+  for (let year = 1; year <= 5; year++) {
+    const periodStart = new Date(fromDate);
+    periodStart.setFullYear(
+      periodStart.getFullYear() + year - 1
+    );
+
+    const periodEnd = new Date(fromDate);
+    periodEnd.setFullYear(
+      periodEnd.getFullYear() + year
+    );
+
+    const yearStart = Math.max(
+      periodStart.getTime(),
+      startTime
+    );
+
+    const yearEnd = Math.min(
+      periodEnd.getTime(),
+      endTime
+    );
+
+    if (yearStart >= yearEnd) {
+      continue;
+    }
+
+    const midpoint = yearStart + (yearEnd - yearStart) / 2;
+
+    const activeMahadasha = dashas.find((d) => {
+      if (d.level !== "MAHADASHA") return false;
+
+      const start = new Date(d.startDate).getTime();
+      const end = new Date(d.endDate).getTime();
+
+      return midpoint >= start && midpoint < end;
+    });
+
+    const activeAntardasha = dashas.find((d) => {
+      if (d.level !== "ANTARDASHA") return false;
+
+      const start = new Date(d.startDate).getTime();
+      const end = new Date(d.endDate).getTime();
+
+      return midpoint >= start && midpoint < end;
+    });
+
+    const activePratyantar = dashas.find((d) => {
+      if (d.level !== "PRATYANTARDASHA") return false;
+
+      const start = new Date(d.startDate).getTime();
+      const end = new Date(d.endDate).getTime();
+
+      return midpoint >= start && midpoint < end;
+    });
+
+    result.push({
+      year,
+      startDate: new Date(yearStart).toISOString(),
+      endDate: new Date(yearEnd).toISOString(),
+      mahadasha: activeMahadasha?.planet,
+      antardasha: activeAntardasha?.planet,
+      pratyantarDasha: activePratyantar?.planet,
+    });
+  }
+
+  return result;
+}
 
 export interface AstrologyCalculation {
   ascendant: string;
   moonSign: string;
   nakshatra: string;
   pada: number;
+
   planets: PlanetPosition[];
   houses: HousePosition[];
+
   dashas: DashaPeriod[];
   currentMahadasha?: DashaPeriod;
   currentAntardasha?: DashaPeriod;
+  currentPratyantar?: DashaPeriod;
+  futureTiming?: FiveYearTimingPeriod[];
   ayanamsa?: number;
-
-  // Varga charts
   d9?: any;
   d10?: any;
+
+  // Birth-time quality
+  birthTimeKnown: boolean;
+  birthTimeUsed: string;
+  calculationMode:
+    | "EXACT_BIRTH_TIME"
+    | "TIME_UNKNOWN";
+
+ 
+ 
+
+  // Later calculation engines
+  yogas?: any[];
+  doshas?: any[];
+  
 }
 
 /* =========================================================
@@ -306,29 +411,42 @@ function createBirthDate(birth: BirthDetailsDraft): Date {
 
 function extractSign(
   value: any,
-  longitude = 0
+  longitude?: number
 ): string {
-  return (
+  const directSign =
     safeString(value?.rashiName) ||
     safeString(value?.sign) ||
-    safeString(value?.rashi) ||
-    getSign(longitude)
-  );
+    safeString(value?.rashi);
+
+  if (directSign) {
+    return directSign;
+  }
+
+  if (
+    longitude !== undefined &&
+    Number.isFinite(longitude)
+  ) {
+    return getSign(longitude);
+  }
+
+  return "";
 }
 
 /* =========================================================
    EXTRACT LONGITUDE
 ========================================================= */
 
-function extractLongitude(
-  data: any
-): number {
-  return safeNumber(
+function extractLongitude(data: any): number {
+  const value =
     data?.longitude ??
-      data?.lon ??
-      data?.degreeLongitude ??
-      0
-  );
+    data?.lon ??
+    data?.degreeLongitude;
+
+  const longitude = Number(value);
+
+  return Number.isFinite(longitude)
+    ? longitude
+    : NaN;
 }
 
 /* =========================================================
@@ -357,6 +475,21 @@ export async function calculateChart(
 ): Promise<AstrologyCalculation> {
 
   console.log("🔥 CALCULATE CHART FUNCTION CALLED");
+const birthTimeKnown =
+  birthDetails.timeUnknown !== true &&
+  Boolean(
+    birthDetails.birthTime ||
+    (birthDetails as any).time ||
+    (birthDetails as any).birth_time
+  );
+
+const calculationMode = birthTimeKnown
+  ? "EXACT_BIRTH_TIME"
+  : "TIME_UNKNOWN";
+
+console.log("========== BIRTH TIME MODE ==========");
+console.log("Birth time known:", birthTimeKnown);
+console.log("Calculation mode:", calculationMode);
   const VIMSHOTTARI_ORDER = [
   "Ketu",
   "Venus",
@@ -445,6 +578,69 @@ function getAntardashaPeriods(
   return result;
 }
 
+function getPratyantarDashaPeriods(
+  antardashaPlanet: string,
+  antardashaStartTime: string,
+  antardashaEndTime: string
+): DashaPeriod[] {
+  const adStart = new Date(antardashaStartTime).getTime();
+  const adEnd = new Date(antardashaEndTime).getTime();
+
+  if (
+    !Number.isFinite(adStart) ||
+    !Number.isFinite(adEnd) ||
+    adEnd <= adStart
+  ) {
+    return [];
+  }
+
+  const adDuration = adEnd - adStart;
+
+  const startIndex =
+    VIMSHOTTARI_ORDER.indexOf(
+      antardashaPlanet as (typeof VIMSHOTTARI_ORDER)[number]
+    );
+
+  if (startIndex < 0) {
+    return [];
+  }
+
+  const totalYears = 120;
+  const result: DashaPeriod[] = [];
+
+  let currentStart = adStart;
+
+  for (let i = 0; i < VIMSHOTTARI_ORDER.length; i++) {
+    const pratyantarPlanet =
+      VIMSHOTTARI_ORDER[
+        (startIndex + i) % VIMSHOTTARI_ORDER.length
+      ];
+
+    const pratyantarYears =
+      VIMSHOTTARI_YEARS[pratyantarPlanet];
+
+    const duration =
+      adDuration *
+      (pratyantarYears / totalYears);
+
+    const currentEnd =
+      i === VIMSHOTTARI_ORDER.length - 1
+        ? adEnd
+        : currentStart + duration;
+
+    result.push({
+      planet: pratyantarPlanet,
+      startDate: new Date(currentStart).toISOString(),
+      endDate: new Date(currentEnd).toISOString(),
+      level:  "PRATYANTARDASHA",
+      parentPlanet: antardashaPlanet,
+    });
+
+    currentStart = currentEnd;
+  }
+
+  return result;
+}
   /* =======================================================
      1. VALIDATE
   ======================================================= */
@@ -624,6 +820,11 @@ console.log(JSON.stringify(kundli?.ascendant, null, 2));
       extractLongitude(
         planetData
       );
+      if (!Number.isFinite(planetLongitude)) {
+  throw new Error(
+    `Invalid longitude for planet: ${planetName}`
+  );
+}
 
     const sign =
       extractSign(
@@ -849,7 +1050,7 @@ console.log(JSON.stringify(kundli?.ascendant, null, 2));
     }
   }
 
-  /* /* =======================================================
+  /* =======================================================
    11. VIMSHOTTARI DASHA
 ======================================================= */
 
@@ -905,16 +1106,32 @@ if (Array.isArray(vimshottari?.fullCycle)) {
       });
 
       // Antardashas inside this Mahadasha
-      const antardashas = getAntardashaPeriods(
-        mahadashaPlanet,
-        startDate,
-        endDate
-      );
+ const antardashas = getAntardashaPeriods(
+  mahadashaPlanet,
+  startDate,
+  endDate
+);
 
-      dashas.push(...antardashas);
-    }
-  }
+for (const antardasha of antardashas) {
+  dashas.push(antardasha);
+
+  const pratyantarDashas =
+    getPratyantarDashaPeriods(
+      antardasha.planet,
+      antardasha.startDate,
+      antardasha.endDate
+    );
+
+  dashas.push(...pratyantarDashas);
 }
+
+// Close period loop
+}
+
+// Close fullCycle if
+}
+}
+
 const currentDate = new Date();
 
 const currentMahadasha = dashas.find((d) => {
@@ -931,6 +1148,17 @@ const currentMahadasha = dashas.find((d) => {
 
 const currentAntardasha = dashas.find((d) => {
   if (d.level !== "ANTARDASHA") return false;
+
+  const start = new Date(d.startDate).getTime();
+  const end = new Date(d.endDate).getTime();
+
+  return (
+    currentDate.getTime() >= start &&
+    currentDate.getTime() < end
+  );
+});
+const currentPratyantar = dashas.find((d) => {
+  if (d.level !== "PRATYANTARDASHA") return false;
 
   const start = new Date(d.startDate).getTime();
   const end = new Date(d.endDate).getTime();
@@ -982,7 +1210,7 @@ console.log(JSON.stringify(kundli?.vargas?.d9, null, 2));
 
 console.log("========== D10 DASAMSA ==========");
 console.log(JSON.stringify(kundli?.vargas?.d10, null, 2));
-
+const futureTiming = buildFiveYearTiming(dashas);
 return {
   ascendant,
   moonSign,
@@ -991,11 +1219,24 @@ return {
   planets,
   houses,
   dashas,
+  futureTiming,
   currentMahadasha,
   currentAntardasha,
+  currentPratyantar,
   ayanamsa,
-
   d9: kundli?.vargas?.d9,
   d10: kundli?.vargas?.d10,
+  birthTimeKnown,
+  birthTimeUsed: birthTimeKnown
+    ? String(
+        birthDetails.birthTime ??
+        (birthDetails as any).time ??
+        (birthDetails as any).birth_time ??
+        ""
+      )
+    : "12:00",
+  calculationMode,
+  yogas: [],
+  doshas: [],
 };
 }
