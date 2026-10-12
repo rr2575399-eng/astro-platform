@@ -2685,8 +2685,79 @@ Before final output, silently verify:
 [ ] Report is substantially deeper than lower-priced services
 [ ] 30+ meaningful pages targeted when data is sufficient
 [ ] If data is insufficient, limitation is stated instead of invented content
+==================================================
+COMPLETE LIFE REPORT — CONTENT DEPTH CONTROL
+==================================================
+
+This is a premium Complete Life Report.
+
+Do not produce a short summary instead of a full report.
+
+Write every applicable chapter in meaningful detail.
+Follow the chapter structure below in the specified order.
+
+CHAPTER 1: Birth Details and Report Overview
+CHAPTER 2: Overall Life Analysis
+CHAPTER 3: Lagna, Rasi and Nakshatra
+CHAPTER 4: Twelve-House Analysis
+CHAPTER 5: Planet-by-Planet Analysis
+CHAPTER 6: Education and Skills
+CHAPTER 7: Career, Employment and Business
+CHAPTER 8: Income, Savings and Property
+CHAPTER 9: Marriage, Relationships and Family
+CHAPTER 10: Mahadasha, Antardasha and Pratyantardasha
+CHAPTER 11: Five-Year Timing Analysis
+CHAPTER 12: Strengths, Challenges and Practical Guidance
+CHAPTER 13: Final Summary and Disclaimer
+
+For each applicable chapter:
+- Explain the relevant supplied astrological factors.
+- Explain what those factors traditionally mean.
+- Connect the interpretation to the customer's question.
+- Explain limitations and uncertainty.
+- Give practical, non-guaranteed guidance.
+- Avoid repeating explanations from earlier chapters.
+- Do not invent missing chart data, dates, planetary placements,
+  yogas, doshas or dasha periods.
+
+TWELVE-HOUSE ANALYSIS:
+Discuss each house separately.
+For each house, include its traditional themes, supplied house
+lord and planetary placements when available, relevant aspects
+when supplied, interpretation, limitations and practical guidance.
+
+PLANET-BY-PLANET ANALYSIS:
+Discuss each available planet separately.
+Use only verified supplied placements, signs, houses, nakshatras,
+lords, aspects and strength calculations.
+Do not assume a planet's strength without supporting data.
+
+DASHA ANALYSIS:
+Use the supplied Mahadasha, Antardasha and Pratyantardasha data.
+Include exact dates only when present in the calculation output.
+Do not invent future dates or guarantee events.
+
+FIVE-YEAR ANALYSIS:
+Use the supplied futureTiming data.
+Clearly distinguish calculated periods from traditional
+interpretations.
+If detailed period transitions are unavailable, state that
+limitation instead of fabricating a timeline.
+
+CONTENT COMPLETENESS:
+Complete every applicable chapter before ending the report.
+Do not replace chapters with a short overall summary.
+Do not use repeated paragraphs to increase length.
+If information is missing, explain the limitation honestly.
+
+OUTPUT:
+Return the complete report content with clear Tamil headings,
+subheadings, paragraphs and useful tables where appropriate.
+Do not include internal instructions or token counts in the report.
 `,
 }
+
+
 
 // ============================================================
 // GET SERVICE PROMPT
