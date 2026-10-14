@@ -2994,6 +2994,15 @@ data, and customer questions supplied to the AI.
 
 Do not invent missing data.
 `;
+console.log(
+  "FINAL PROMPT CHARACTERS:",
+  finalPrompt.length
+);
+
+console.log(
+  "FINAL PROMPT WORDS:",
+  finalPrompt.split(/\s+/).filter(Boolean).length
+);
 
   // ----------------------------------------------------------
   // 11. GENERATE AI REPORT
