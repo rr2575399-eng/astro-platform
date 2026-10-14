@@ -137,9 +137,24 @@ export async function generateReport(
       // Gemini response structure:
       // data.candidates[0].content.parts[0].text
 
-      const text: string =
-        data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "";
+const candidate = data?.candidates?.[0];
+
+const generatedText =
+  candidate?.content?.parts
+    ?.map((part: { text?: string }) => part.text ?? "")
+    .join("") ?? "";
+
+console.log("AI MODEL:", model);
+console.log("AI FINISH REASON:", candidate?.finishReason);
+console.log("AI OUTPUT CHARACTERS:", generatedText.length);
+console.log(
+  "AI OUTPUT WORDS:",
+  generatedText.split(/\s+/).filter(Boolean).length
+);
+console.log("AI USAGE METADATA:", data?.usageMetadata);
+
+const text = generatedText;
+        
 
       // Empty response — retry
       if (!text.trim() && attempt < MAX_ATTEMPTS) {

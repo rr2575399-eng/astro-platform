@@ -2974,21 +2974,16 @@ Do not assume a service type that was not supplied.
 Do not invent missing astrology information.
 `;
 
-const finalPrompt = `
-${defaultPrompt}
-
+const finalPrompt = defaultPrompt.replace(
+  "{{SERVICE_INSTRUCTION}}",
+  serviceInstruction
+) + `
 ==================================================
 SELECTED SERVICE
 ==================================================
 
 serviceSlug:
 ${normalizedServiceSlug}
-
-==================================================
-SERVICE-SPECIFIC INSTRUCTIONS
-==================================================
-
-${serviceInstruction}
 
 ==================================================
 CUSTOMER + ASTROLOGY INPUT
