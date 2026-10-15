@@ -27,6 +27,15 @@ export async function generateReport(
     typeof input === "string"
       ? input
       : JSON.stringify(input, null, 2);
+      console.log(
+  "AI INPUT CHARACTERS:",
+  inputText.length
+);
+
+console.log(
+  "AI INPUT WORDS:",
+  inputText.split(/\s+/).filter(Boolean).length
+);
 
       console.log("========== AI INPUT ASTROLOGY ==========");
       console.log(inputText);
