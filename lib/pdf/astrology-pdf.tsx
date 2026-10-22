@@ -483,51 +483,52 @@ function getAnswerPreview(reportText: string): string {
     .map((line) => line.trim())
     .filter(Boolean);
 
-  const answerHeadings = [
-    "முக்கிய பதில்",
-    "முக்கியமான பதில்",
-    "உங்கள் கேள்விக்கான பதில்",
-    "நேரடி பதில்",
-    "சுருக்கமான பதில்",
-    "கேள்விக்கான நேரடி பதில்",
-    "main answer",
-    "direct answer",
-    "answer to your question",
-  ];
-
-  const stopHeadings = [
-    "ஜாதக காரணங்கள்",
-    "ஜோதிட காரணங்கள்",
-    "தனிப்பட்ட பகுப்பாய்வு",
-    "தனிப்பட்ட ஆய்வு",
-    "காலகட்ட வழிகாட்டுதல்",
-    "முக்கிய குறிப்புகள்",
-    "இறுதி ஆலோசனை",
-    "astrology reasons",
-    "personal analysis",
-    "timing guidance",
-    "final advice",
-  ];
-
-  const normalize = (value: string) =>
-    value
+  const normalize = (line: string) =>
+    line
       .replace(/^[#\s\-–—*•]+/, "")
       .replace(/[:\-–—]+$/, "")
       .trim()
       .toLowerCase();
 
-  let startIndex = -1;
+  // முதலில் கேள்விக்கான நேரடி பதில் அத்தியாயத்தைத் தேடவும்.
+  const directAnswerIndex = lines.findIndex((line) => {
+    const value = normalize(line);
 
-  for (let i = 0; i < lines.length; i++) {
-    const line = normalize(lines[i]);
-
-    if (
-      answerHeadings.some(
-        (heading) => line === heading.toLowerCase()
+    return (
+      /^அத்தியாயம்\s*2\b/i.test(value) &&
+      (
+        value.includes("நேரடி பதில்") ||
+        value.includes("திருமணம் எப்போது") ||
+        value.includes("கேள்விக்கான பதில்")
       )
-    ) {
-      startIndex = i + 1;
-      break;
+    );
+  });
+
+  let startIndex = directAnswerIndex >= 0
+    ? directAnswerIndex + 1
+    : -1;
+
+  // அத்தியாயம் 2 கிடைக்காவிட்டால், பதில் heading-ஐத் தேடவும்.
+  if (startIndex < 0) {
+    const headings = [
+      "முக்கிய பதில்",
+      "முக்கியமான பதில்",
+      "உங்கள் கேள்விக்கான பதில்",
+      "நேரடி பதில்",
+      "சுருக்கமான பதில்",
+      "main answer",
+      "direct answer",
+      "answer to your question",
+    ];
+
+    const headingIndex = lines.findIndex((line) =>
+      headings.some(
+        (heading) => normalize(line) === heading.toLowerCase()
+      )
+    );
+
+    if (headingIndex >= 0) {
+      startIndex = headingIndex + 1;
     }
   }
 
@@ -535,33 +536,39 @@ function getAnswerPreview(reportText: string): string {
     const result: string[] = [];
 
     for (let i = startIndex; i < lines.length; i++) {
-      const line = normalize(lines[i]);
+      const line = lines[i];
+      const value = normalize(line);
+
+      // அடுத்த அத்தியாயம் தொடங்கினால் நிறுத்தவும்.
+      if (/^அத்தியாயம்\s*3\b/i.test(value)) {
+        break;
+      }
 
       if (
-        stopHeadings.some(
-          (heading) => line === heading.toLowerCase()
-        )
+        /^(ஜாதக காரணங்கள்|ஜோதிட காரணங்கள்|தனிப்பட்ட பகுப்பாய்வு|தனிப்பட்ட ஆய்வு|final advice|astrology reasons)$/i.test(value)
       ) {
         break;
       }
 
-      result.push(lines[i]);
+      result.push(line);
 
-      if (result.join(" ").length >= 700) {
+      if (result.join(" ").length >= 900) {
         break;
       }
     }
 
-    if (result.length > 0) {
-      return result.join("\n");
+    const answer = result.join("\n").trim();
+
+    if (answer.length > 0) {
+      return answer;
     }
   }
 
-  // பொருத்தமான heading கிடைக்காவிட்டால்,
-  // report-ன் தொடக்கத்தில் உள்ள உரையைப் பயன்படுத்தவும்.
+  // பொருத்தமான heading கிடைக்காவிட்டால், report-ன்
+  // தொடக்கத்தை மட்டும் fallback ஆகப் பயன்படுத்தவும்.
   return lines
     .filter((line) => line.length > 8)
-    .slice(0, 8)
+    .slice(0, 6)
     .join("\n");
 }
 

@@ -2994,15 +2994,24 @@ data, and customer questions supplied to the AI.
 
 Do not invent missing data.
 `;
-console.log(
-  "FINAL PROMPT CHARACTERS:",
-  finalPrompt.length
-);
+const reportInput = {
+  customer,
+  birthDetails: birth,
+  astrology: chart,
+  serviceSlug,
+  questions: order.questions,
+};
 
-console.log(
-  "FINAL PROMPT WORDS:",
-  finalPrompt.split(/\s+/).filter(Boolean).length
-);
+const reportInputText = JSON.stringify(reportInput);
+
+console.log("========== REPORT SIZE CHECK ==========");
+console.log("SERVICE SLUG:", normalizedServiceSlug);
+console.log("SERVICE INSTRUCTION CHARACTERS:", serviceInstruction.length);
+console.log("FINAL PROMPT CHARACTERS:", finalPrompt.length);
+console.log("FINAL PROMPT WORDS:", finalPrompt.split(/\s+/).filter(Boolean).length);
+console.log("REPORT INPUT CHARACTERS:", reportInputText.length);
+console.log("REPORT INPUT WORDS:", reportInputText.split(/\s+/).filter(Boolean).length);
+console.log("========================================");
 
   // ----------------------------------------------------------
   // 11. GENERATE AI REPORT
