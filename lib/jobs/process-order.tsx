@@ -3127,6 +3127,7 @@ console.log(
       orderNumber: String(
         order.order_number
       ),
+      serviceSlug: normalizedServiceSlug,
 
       birthDate: birth.dob,
 

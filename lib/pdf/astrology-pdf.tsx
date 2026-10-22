@@ -376,6 +376,8 @@ type AstrologyPdfProps = {
   reportText: string;
   orderNumber: string;
 
+  serviceSlug?: string;
+
   birthDate?: string;
   birthTime?: string;
   birthPlace?: string;
@@ -481,23 +483,47 @@ function getAnswerPreview(reportText: string): string {
     .map((line) => line.trim())
     .filter(Boolean);
 
-  const answerHeadingIndexes = [
+  const answerHeadings = [
     "முக்கிய பதில்",
     "முக்கியமான பதில்",
     "உங்கள் கேள்விக்கான பதில்",
     "நேரடி பதில்",
+    "சுருக்கமான பதில்",
+    "கேள்விக்கான நேரடி பதில்",
     "main answer",
     "direct answer",
+    "answer to your question",
   ];
+
+  const stopHeadings = [
+    "ஜாதக காரணங்கள்",
+    "ஜோதிட காரணங்கள்",
+    "தனிப்பட்ட பகுப்பாய்வு",
+    "தனிப்பட்ட ஆய்வு",
+    "காலகட்ட வழிகாட்டுதல்",
+    "முக்கிய குறிப்புகள்",
+    "இறுதி ஆலோசனை",
+    "astrology reasons",
+    "personal analysis",
+    "timing guidance",
+    "final advice",
+  ];
+
+  const normalize = (value: string) =>
+    value
+      .replace(/^[#\s\-–—*•]+/, "")
+      .replace(/[:\-–—]+$/, "")
+      .trim()
+      .toLowerCase();
 
   let startIndex = -1;
 
   for (let i = 0; i < lines.length; i++) {
-    const lower = lines[i].toLowerCase();
+    const line = normalize(lines[i]);
 
     if (
-      answerHeadingIndexes.some((heading) =>
-        lower.startsWith(heading.toLowerCase())
+      answerHeadings.some(
+        (heading) => line === heading.toLowerCase()
       )
     ) {
       startIndex = i + 1;
@@ -509,11 +535,21 @@ function getAnswerPreview(reportText: string): string {
     const result: string[] = [];
 
     for (let i = startIndex; i < lines.length; i++) {
-      if (isHeading(lines[i])) break;
+      const line = normalize(lines[i]);
+
+      if (
+        stopHeadings.some(
+          (heading) => line === heading.toLowerCase()
+        )
+      ) {
+        break;
+      }
 
       result.push(lines[i]);
 
-      if (result.join(" ").length >= 550) break;
+      if (result.join(" ").length >= 700) {
+        break;
+      }
     }
 
     if (result.length > 0) {
@@ -521,16 +557,12 @@ function getAnswerPreview(reportText: string): string {
     }
   }
 
-  const meaningful = lines.filter(
-    (line) =>
-      line.length > 8 &&
-      !line.toLowerCase().includes("birth") &&
-      !line.toLowerCase().includes("date of birth") &&
-      !line.toLowerCase().includes("technical") &&
-      !line.toLowerCase().includes("disclaimer")
-  );
-
-  return meaningful.slice(0, 4).join("\n");
+  // பொருத்தமான heading கிடைக்காவிட்டால்,
+  // report-ன் தொடக்கத்தில் உள்ள உரையைப் பயன்படுத்தவும்.
+  return lines
+    .filter((line) => line.length > 8)
+    .slice(0, 8)
+    .join("\n");
 }
 
 /* ========================================================= */
@@ -626,6 +658,7 @@ export function createAstrologyPdfDocument({
   customerName,
   reportText,
   orderNumber,
+  serviceSlug,
   birthDate,
   birthTime,
   birthPlace,
@@ -904,13 +937,15 @@ export function createAstrologyPdfDocument({
           description="பணம், சேமிப்பு, நிதி நிலை மற்றும் பொருளாதார முன்னேற்றத்திற்கான தனிப்பட்ட ஆய்வு."
           price="₹29"
         />
-
-        <ProductCard
-          name="முழுமையான வாழ்க்கை ஜாதக அறிக்கை"
-          description="வாழ்க்கையின் பல முக்கிய பகுதிகளை ஒருங்கிணைத்து வழங்கப்படும் விரிவான தனிப்பட்ட ஜாதக ஆய்வு."
-          price="₹399"
-          premium
-        />
+{serviceSlug !== "complete-life" &&
+  serviceSlug !== "complete-life-report" && (
+    <ProductCard
+      name="முழுமையான வாழ்க்கை ஜாதக அறிக்கை"
+      description="வாழ்க்கையின் பல முக்கிய பகுதிகளை ஒருங்கிணைத்து வழங்கப்படும் விரிவான தனிப்பட்ட ஜாதக ஆய்வு."
+      price="₹399"
+      premium
+    />
+  )}
 
         <View style={styles.noteBox}>
           <Text style={styles.noteTitle}>

@@ -31,14 +31,6 @@ export async function generateReport(
   "AI INPUT CHARACTERS:",
   inputText.length
 );
-
-console.log(
-  "AI INPUT WORDS:",
-  inputText.split(/\s+/).filter(Boolean).length
-);
-
-      console.log("========== AI INPUT ASTROLOGY ==========");
-      console.log(inputText);
   // --------------------------------------------------------
   // RETRY LOGIC — 3 attempts
   // --------------------------------------------------------
