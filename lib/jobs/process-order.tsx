@@ -3013,6 +3013,41 @@ console.log("REPORT INPUT CHARACTERS:", reportInputText.length);
 console.log("REPORT INPUT WORDS:", reportInputText.split(/\s+/).filter(Boolean).length);
 console.log("========================================");
 
+function getCharacterCount(value: unknown): number {
+  return JSON.stringify(value)?.length ?? 0;
+}
+
+console.log("========== REPORT INPUT BREAKDOWN ==========");
+console.log("CUSTOMER:", getCharacterCount(reportInput.customer));
+console.log("BIRTH DETAILS:", getCharacterCount(reportInput.birthDetails));
+console.log("ASTROLOGY CHART:", getCharacterCount(reportInput.astrology));
+console.log("SERVICE SLUG:", getCharacterCount(reportInput.serviceSlug));
+console.log("CUSTOMER QUESTIONS:", getCharacterCount(reportInput.questions));
+
+if (
+  reportInput.astrology &&
+  typeof reportInput.astrology === "object"
+) {
+  console.log(
+    "ASTROLOGY TOP-LEVEL KEYS:",
+    Object.keys(reportInput.astrology)
+  );
+
+ const chart = reportInput.astrology as unknown as Record<string, unknown>;
+
+  console.log(
+    "ASTROLOGY FIELD SIZES:",
+    Object.fromEntries(
+      Object.entries(chart).map(([key, value]) => [
+        key,
+        getCharacterCount(value),
+      ])
+    )
+  );
+}
+
+console.log("=============================================");
+
   // ----------------------------------------------------------
   // 11. GENERATE AI REPORT
   // ----------------------------------------------------------
