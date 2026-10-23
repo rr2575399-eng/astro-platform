@@ -3093,6 +3093,22 @@ console.log(
     2
   )
 );
+const dashas = reportInput.astrology.dashas;
+
+const dashaLevelCounts: Record<string, number> = {};
+const dashaPlanetCounts: Record<string, number> = {};
+
+for (const dasha of dashas) {
+  dashaLevelCounts[dasha.level] =
+    (dashaLevelCounts[dasha.level] ?? 0) + 1;
+
+  dashaPlanetCounts[dasha.planet] =
+    (dashaPlanetCounts[dasha.planet] ?? 0) + 1;
+}
+
+console.log("DASHA TOTAL ENTRIES:", dashas.length);
+console.log("DASHA COUNTS BY LEVEL:", dashaLevelCounts);
+console.log("DASHA COUNTS BY PLANET:", dashaPlanetCounts);
 
 console.log("=============================================");
 
