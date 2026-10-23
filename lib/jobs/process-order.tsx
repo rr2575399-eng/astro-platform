@@ -3045,6 +3045,54 @@ if (
     )
   );
 }
+function describeDataShape(
+  value: unknown,
+  depth = 0
+): unknown {
+  if (Array.isArray(value)) {
+    return {
+      type: "array",
+      length: value.length,
+      firstItem:
+        value.length > 0 && depth < 3
+          ? describeDataShape(value[0], depth + 1)
+          : undefined,
+    };
+  }
+
+  if (value !== null && typeof value === "object") {
+    const entries = Object.entries(
+      value as Record<string, unknown>
+    );
+
+    return {
+      type: "object",
+      keys: entries.map(([key]) => key),
+      fields:
+        depth < 3
+          ? Object.fromEntries(
+              entries.map(([key, child]) => [
+                key,
+                describeDataShape(child, depth + 1),
+              ])
+            )
+          : undefined,
+    };
+  }
+
+  return {
+    type: value === null ? "null" : typeof value,
+  };
+}
+
+console.log(
+  "DASHA DATA STRUCTURE:",
+  JSON.stringify(
+    describeDataShape(reportInput.astrology.dashas),
+    null,
+    2
+  )
+);
 
 console.log("=============================================");
 
