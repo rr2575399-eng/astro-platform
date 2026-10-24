@@ -2994,11 +2994,31 @@ data, and customer questions supplied to the AI.
 
 Do not invent missing data.
 `;
+const isCompleteLifeReport =
+  normalizedServiceSlug === "complete-life";
+
+const chartForReport = isCompleteLifeReport
+  ? {
+      ...chart,
+      dashas: Array.isArray(chart.dashas)
+        ? chart.dashas.filter((dasha) => {
+            const level = String(
+              (dasha as { level?: unknown }).level ?? ""
+            ).toUpperCase();
+
+            // Keep Mahadasha and Antardasha entries.
+            // Remove only Pratyantardasha entries.
+            return !level.includes("PRATYANTAR");
+          })
+        : chart.dashas,
+    }
+  : chart;
+
 const reportInput = {
   customer,
   birthDetails: birth,
-  astrology: chart,
-  serviceSlug,
+  astrology: chartForReport,
+  serviceSlug: normalizedServiceSlug,
   questions: order.questions,
 };
 
@@ -3008,135 +3028,42 @@ console.log("========== REPORT SIZE CHECK ==========");
 console.log("SERVICE SLUG:", normalizedServiceSlug);
 console.log("SERVICE INSTRUCTION CHARACTERS:", serviceInstruction.length);
 console.log("FINAL PROMPT CHARACTERS:", finalPrompt.length);
-console.log("FINAL PROMPT WORDS:", finalPrompt.split(/\s+/).filter(Boolean).length);
-console.log("REPORT INPUT CHARACTERS:", reportInputText.length);
-console.log("REPORT INPUT WORDS:", reportInputText.split(/\s+/).filter(Boolean).length);
+console.log(
+  "REPORT INPUT CHARACTERS:",
+  reportInputText.length
+);
+console.log(
+  "REPORT INPUT WORDS:",
+  reportInputText.split(/\s+/).filter(Boolean).length
+);
+console.log(
+  "ORIGINAL DASHA COUNT:",
+  Array.isArray(chart.dashas) ? chart.dashas.length : 0
+);
+console.log(
+  "REPORT DASHA COUNT:",
+  Array.isArray(chartForReport.dashas)
+    ? chartForReport.dashas.length
+    : 0
+);
 console.log("========================================");
 
-function getCharacterCount(value: unknown): number {
-  return JSON.stringify(value)?.length ?? 0;
-}
-
-console.log("========== REPORT INPUT BREAKDOWN ==========");
-console.log("CUSTOMER:", getCharacterCount(reportInput.customer));
-console.log("BIRTH DETAILS:", getCharacterCount(reportInput.birthDetails));
-console.log("ASTROLOGY CHART:", getCharacterCount(reportInput.astrology));
-console.log("SERVICE SLUG:", getCharacterCount(reportInput.serviceSlug));
-console.log("CUSTOMER QUESTIONS:", getCharacterCount(reportInput.questions));
-
-if (
-  reportInput.astrology &&
-  typeof reportInput.astrology === "object"
-) {
-  console.log(
-    "ASTROLOGY TOP-LEVEL KEYS:",
-    Object.keys(reportInput.astrology)
-  );
-
- const chart = reportInput.astrology as unknown as Record<string, unknown>;
-
-  console.log(
-    "ASTROLOGY FIELD SIZES:",
-    Object.fromEntries(
-      Object.entries(chart).map(([key, value]) => [
-        key,
-        getCharacterCount(value),
-      ])
-    )
-  );
-}
-function describeDataShape(
-  value: unknown,
-  depth = 0
-): unknown {
-  if (Array.isArray(value)) {
-    return {
-      type: "array",
-      length: value.length,
-      firstItem:
-        value.length > 0 && depth < 3
-          ? describeDataShape(value[0], depth + 1)
-          : undefined,
-    };
-  }
-
-  if (value !== null && typeof value === "object") {
-    const entries = Object.entries(
-      value as Record<string, unknown>
-    );
-
-    return {
-      type: "object",
-      keys: entries.map(([key]) => key),
-      fields:
-        depth < 3
-          ? Object.fromEntries(
-              entries.map(([key, child]) => [
-                key,
-                describeDataShape(child, depth + 1),
-              ])
-            )
-          : undefined,
-    };
-  }
-
-  return {
-    type: value === null ? "null" : typeof value,
-  };
-}
-
-console.log(
-  "DASHA DATA STRUCTURE:",
-  JSON.stringify(
-    describeDataShape(reportInput.astrology.dashas),
-    null,
-    2
-  )
+const report = await generateReport(
+  reportInput,
+  finalPrompt
 );
-const dashas = reportInput.astrology.dashas;
 
-const dashaLevelCounts: Record<string, number> = {};
-const dashaPlanetCounts: Record<string, number> = {};
-
-for (const dasha of dashas) {
-  dashaLevelCounts[dasha.level] =
-    (dashaLevelCounts[dasha.level] ?? 0) + 1;
-
-  dashaPlanetCounts[dasha.planet] =
-    (dashaPlanetCounts[dasha.planet] ?? 0) + 1;
+if (!report.text || !report.text.trim()) {
+  throw new Error(
+    "AI report generation returned empty content"
+  );
 }
 
-console.log("DASHA TOTAL ENTRIES:", dashas.length);
-console.log("DASHA COUNTS BY LEVEL:", dashaLevelCounts);
-console.log("DASHA COUNTS BY PLANET:", dashaPlanetCounts);
-
-console.log("=============================================");
-
-  // ----------------------------------------------------------
-  // 11. GENERATE AI REPORT
-  // ----------------------------------------------------------
-
-  const report = await generateReport(
-    {
-      customer,
-
-      birthDetails: birth,
-
-      astrology: chart,
-
-      serviceSlug,
-
-      questions: order.questions,
-    },
-
-    finalPrompt
-  );
-
-  if (!report.text || !report.text.trim()) {
-    throw new Error(
-      "AI report generation returned empty content"
-    );
-  }
+console.log("AI OUTPUT CHARACTERS:", report.text.length);
+console.log(
+  "AI OUTPUT WORDS:",
+  report.text.split(/\s+/).filter(Boolean).length
+);
 
   // ----------------------------------------------------------
   // 12. SAVE AI REPORT
