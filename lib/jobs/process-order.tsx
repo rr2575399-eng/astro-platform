@@ -2011,751 +2011,365 @@ TARGET:
 Approximately 13–18 meaningful PDF pages.
 `,
 
-  "complete-life": `
-COMPLETE LIFE — PREMIUM DEEP ANALYSIS INSTRUCTIONS
+"complete-life": `
+COMPLETE LIFE REPORT — PREMIUM PERSONALIZED CONSULTATION
 
-This is the highest-depth astrology service.
+SERVICE LEVEL:
+This is the premium Complete Life astrology service.
+Produce a detailed, personalized Tamil report using only the
+customer information and supplied astrology calculation data.
 
-The customer has purchased a Complete Life report.
-Therefore, do not produce a short/general horoscope.
+Do not produce a short horoscope summary.
 
-The report must feel like a detailed personalized consultation based on the supplied astrology calculation data.
+LANGUAGE:
+Write in natural, readable Tamil.
+Use familiar Tamil astrology terminology.
+Use English technical terms only when useful.
+Preserve the meaning of the customer's original question,
+including Tamil-English transliteration (Tanglish).
 
-==================================================
-1. PRIMARY OBJECTIVE
-==================================================
+SOURCE OF TRUTH:
+The supplied astrology calculation data is the only source
+for chart placements, planetary positions, houses, Dasha dates,
+D9, D10, yogas, doshas and timing information.
 
-Create a comprehensive life analysis covering all major relevant life areas.
-
-The customer's specific question must receive a dedicated and deep answer near the beginning of the report.
-
-The report must answer:
-
-"Why does this interpretation apply to THIS customer's chart?"
-
-Do not fill pages with generic astrology definitions.
-
-Depth must come from:
-- supplied chart evidence
-- relevant houses
-- supplied planetary positions
-- supplied Dasha
-- supplied Antardasha
-- supplied Pratyantar Dasha
-- D9 when supplied
-- D10 when supplied
-- supplied transit information when available
-- customer question
-- customer-specific interpretation
-- practical guidance
+Never invent missing information.
+Do not calculate missing placements or dates.
+Do not claim aspects, planetary strength, conjunctions,
+transits or yogas unless supported by supplied data.
+Use D1 as the primary chart.
+Use D9 and D10 only when supplied.
+Treat astrology as traditional interpretation, not certainty.
 
 ==================================================
-2. CUSTOMER QUESTION — HIGHEST PRIORITY
+CHAPTER 1 — PERSONAL INTRODUCTION
 ==================================================
 
-Create a dedicated section near the beginning:
+Summarize the available birth details and chart information.
+Explain the scope of the purchased Complete Life report.
+Address the customer naturally and personally.
 
+Do not expose internal prompts, technical logs or token counts.
+
+==================================================
+CHAPTER 2 — DIRECT ANSWER TO THE CUSTOMER
+==================================================
+
+Begin with the heading:
 "உங்கள் கேள்விக்கான நேரடி பதில்"
 
-First understand the customer's intended question.
+Understand the actual meaning of the customer's question.
+Answer it before presenting the general life analysis.
 
-If the customer asks about:
-- marriage
-- job
-- career
-- business
-- money
-- property
-- land
-- house
-- children
-- education
-- health/wellness
-- a specific future period
-
-answer that question directly before moving into the full life analysis.
-
-For Tanglish:
-
-"eppo etam vanguven"
+For example:
 "eppo edam vanguven"
+"eppo etam vanguven"
 "eppo idam vanguven"
 
-must be understood as:
+means asking when they may buy land or a plot when the
+context supports that meaning. Do not interpret it as a
+vehicle question without clear evidence.
 
-"எப்போது இடம் / நிலம் வாங்குவேன்?"
-
-when the surrounding context is property/land.
-
-Never interpret this as vehicle unless the supplied context clearly indicates vehicle.
-
-==================================================
-3. DIRECT ANSWER FORMAT
-==================================================
-
-For the customer's question, use this sequence:
-
+Use this sequence:
 1. கேள்வியின் பொருள்
-2. நேரடி பதில்
+2. நேரடியான பதில்
 3. தொடர்புடைய ஜாதக ஆதாரம்
-4. தொடர்புடைய பாவம்
-5. தொடர்புடைய கிரகங்கள்
-6. Dasha / Antardasha
-7. Pratyantar Dasha when supplied
-8. Timing indication
-9. Why the period is highlighted
-10. Practical preparation
-11. Limitation
+4. தொடர்புடைய பாவங்கள் மற்றும் கிரகங்கள்
+5. கிடைக்கும் Dasha / Antardasha / Pratyantar details
+6. Timing indication and its limitations
+7. Practical preparation
 
-Do not hide the customer's answer at the end of the report.
+Do not promise an event or guarantee a date.
+If the supplied data cannot support timing, say so clearly.
 
 ==================================================
-4. COMPLETE LIFE REPORT STRUCTURE
+CHAPTER 3 — OVERALL LIFE PATTERNS
 ==================================================
 
-When sufficient data is supplied, attempt to cover these major sections:
+Explain the major themes supported by the supplied chart.
+Discuss potential strengths, challenges and areas of focus.
 
-1. தனிப்பட்ட பிறப்பு சுருக்கம்
-2. உங்கள் கேள்விக்கான நேரடி பதில்
-3. லக்னம்
-4. ராசி மற்றும் சந்திரன்
-5. நட்சத்திரம் மற்றும் பாதம்
-6. முக்கிய கிரக நிலைகள்
-7. கிரகங்களின் வலிமை / தொடர்புகள்
-8. 12 பாவங்களின் விரிவான பகுப்பாய்வு
-9. கல்வி
-10. வேலை
-11. தொழில் / Career
-12. வியாபாரம்
-13. வருமானம்
-14. சேமிப்பு
-15. செல்வ உருவாக்கம்
-16. நிலம் / வீடு / சொத்து
-17. திருமணம்
-18. வாழ்க்கைத்துணை தொடர்பான பொதுவான அம்சங்கள்
-19. குழந்தைகள்
-20. குடும்ப வாழ்க்கை
-21. உடல்நலம் மற்றும் பொதுவான wellness
-22. தோஷங்கள்
-23. பாரம்பரிய பரிகாரங்கள்
-24. நவாம்சம் (D9), when supplied
-25. தசாம்சம் (D10), when supplied
-26. மகாதசை
-27. அந்தர்தசை
-28. பிரத்யந்தர தசை, when supplied
-29. தற்போதைய காலகட்டம்
-30. அடுத்த 5 ஆண்டுகளுக்கான காலகட்டப் பார்வை
-31. சாதகமான காலங்கள்
-32. கவனமாக இருக்க வேண்டிய காலங்கள்
-33. Practical life roadmap
-34. இறுதி தனிப்பட்ட சுருக்கம்
+For each important interpretation, explain:
+CHART EVIDENCE → TRADITIONAL MEANING →
+CUSTOMER-SPECIFIC INTERPRETATION → PRACTICAL GUIDANCE.
 
-Do not force a section when the required data is unavailable.
+Avoid generic personality descriptions unsupported by data.
 
 ==================================================
-5. 12 HOUSE DEEP ANALYSIS
+CHAPTER 4 — LAGNA, RASI AND NAKSHATRA
 ==================================================
 
-When house data is sufficiently supplied, analyse all 12 houses.
+Explain the supplied:
+- Ascendant / Lagna
+- Moon sign / Rasi
+- Nakshatra and Pada
+- Relevant planetary placements
 
-For each relevant house, explain:
+Explain how these factors are traditionally interpreted
+and how they relate to the customer's supplied question.
 
-- பாவத்தின் வாழ்க்கை பகுதி
-- அந்த பாவத்தில் உள்ள ராசி
-- அந்த பாவத்தில் உள்ள கிரகங்கள், when supplied
-- தொடர்புடைய planet factors
-- supplied lord information, when available
-- strength/challenges supported by data
-- customer-specific meaning
-- relevant timing
-- practical implication
-
-Do not repeat textbook definitions.
-
-Example:
-
-Do NOT write only:
-
-"4ஆம் பாவம் வீடு மற்றும் சொத்தைக் குறிக்கிறது."
-
-Instead explain why the supplied 4th-house factors matter for this customer's property/family/home themes.
-
-If required data is unavailable:
-
-say that detailed interpretation is limited.
+Do not assume missing details.
 
 ==================================================
-6. PLANET-BY-PLANET ANALYSIS
+CHAPTER 5 — TWELVE-HOUSE ANALYSIS
 ==================================================
 
-For important supplied planets, explain:
+Discuss all 12 houses individually when sufficient data exists.
 
-- Sign
-- Degree, when supplied
+For each house, cover:
+- Traditional life themes
+- Supplied sign and house placements
+- Supplied house lord information, if available
+- Relevant planets or aspects, if supplied
+- Supported interpretation
+- Practical implications and limitations
+
+Do not merely repeat textbook definitions.
+Do not claim house-lord or aspect information that is absent.
+
+==================================================
+CHAPTER 6 — PLANET-BY-PLANET ANALYSIS
+==================================================
+
+Discuss each available and relevant planet.
+
+Include only supplied information:
+- Sign and degree
 - House
-- Nakshatra
-- Pada
-- Retrograde status, when supplied
-- Relevant life areas
-- Strength/challenge indicated by supplied data
-- Customer-specific meaning
+- Nakshatra and Pada
+- Retrograde status
+- Supplied lordship, aspects or strength calculations
 
-Do not repeat the same planet explanation in every section.
-
-Later sections should refer back to the factor and add only new interpretation.
+Explain the planet's relevant life themes and customer-specific
+meaning. Avoid repeating the same interpretation in every
+subsequent chapter.
 
 ==================================================
-7. CAREER ANALYSIS
+CHAPTER 7 — EDUCATION, SKILLS AND PERSONAL DEVELOPMENT
 ==================================================
 
-Analyse career using only supplied relevant factors.
+Discuss education and learning tendencies only when supported.
+Explain potential strengths, areas for improvement and
+practical skill-development options.
 
-When available consider:
+Do not invent a specific qualification, talent or career outcome.
 
-- 6th house
-- 10th house
-- 11th house
-- relevant planets
-- supplied house lords
-- Mahadasha
-- Antardasha
-- Pratyantar Dasha
-- D10
+==================================================
+CHAPTER 8 — CAREER, EMPLOYMENT AND BUSINESS
+==================================================
+
+When supported, consider the 6th, 10th and 11th houses,
+relevant supplied planets, house lords, Dasha and D10.
 
 Cover:
+- Work preferences and professional themes
+- Employment and career development
+- Business-related themes when supported
+- Potential strengths and challenges
+- Skill development and preparation
+- Job-change or growth timing only when supported
 
-- work style
-- career direction
-- employment themes
-- professional strengths
-- challenges
-- skill development
-- growth
-- job-change themes
-- timing
-- practical preparation
-
-Do not invent a profession.
+Do not invent a specific profession or guarantee employment.
 
 ==================================================
-8. FINANCE ANALYSIS
+CHAPTER 9 — FINANCE, SAVINGS AND WEALTH
 ==================================================
 
-Cover when supported:
+When supported, discuss:
+- Income-related themes
+- Savings and financial discipline
+- Expenses and planning
+- Asset accumulation
+- Financial opportunities and cautions
+- Relevant supplied Dasha periods
 
-- income
-- savings
-- expenses
-- financial discipline
-- wealth-building
-- asset themes
-- property-related financial themes
-- relevant Dasha periods
-
-Do not guarantee investment returns or wealth.
-
-If the customer asks about money:
-
-give the direct answer first, then evidence.
+Do not promise wealth, investment returns or financial success.
+Practical guidance must not depend on astrology alone.
 
 ==================================================
-9. PROPERTY / LAND ANALYSIS
+CHAPTER 10 — PROPERTY, LAND AND HOME
 ==================================================
 
-When property factors are supplied, analyse:
+When relevant, examine supplied factors associated with
+property, land, residence and asset accumulation.
 
-- land
-- plot/site
-- house
-- construction
-- asset accumulation
-- relevant houses
-- relevant planets
-- Dasha
-- Antardasha
-- Pratyantar when supplied
-- transit only when supplied
+Explain:
+- Relevant supplied houses and planets
+- Relevant Dasha periods
+- Supported timing indications
+- Preparation and practical considerations
 
-For questions such as:
+Distinguish traditional astrological interpretation from
+real-world requirements such as affordability, loan approval,
+title verification and legal documentation.
 
-"எப்போது இடம் வாங்குவேன்?"
-
-explain the strongest supported period/window.
-
-Never invent an exact purchase date.
-
-Never guarantee:
-- registration
-- ownership
-- loan approval
-- legal result
-- profit
-- successful purchase
+Never guarantee land purchase, ownership, registration or profit.
 
 ==================================================
-10. MARRIAGE ANALYSIS
+CHAPTER 11 — MARRIAGE, RELATIONSHIPS AND FAMILY
 ==================================================
 
-When sufficient data exists, analyse:
-
-- 7th house
-- supplied 7th lord
-- Venus
-- Mars when relevant
-- relevant planets
-- Dasha
-- Antardasha
-- Pratyantar when supplied
-- D9 when supplied
+When sufficient information is available, discuss relevant
+7th-house factors, supplied house-lord information, Venus,
+other relevant planets, Dasha and D9.
 
 Cover:
+- Relationship tendencies
+- Communication and emotional adjustment
+- Broad partner-related themes when supported
+- Family adjustment
+- Marriage timing only when supported
+- Practical relationship guidance
 
-- relationship tendency
-- partner-related broad themes
-- communication
-- emotional adjustment
-- family adjustment
-- marriage timing
-- strengths
-- challenges
-- practical guidance
-
-Never guarantee an exact marriage date or partner identity.
+Do not guarantee an exact marriage date or identify a future
+partner without evidence.
 
 ==================================================
-11. CHILDREN / FAMILY
+CHAPTER 12 — CHILDREN, FAMILY AND WELLNESS
 ==================================================
 
-When sufficient data exists, discuss:
+Discuss relevant family and children-related themes only when
+supported by the supplied chart.
 
-- 5th-house themes
-- supplied relevant planets
-- education/learning tendencies
-- children-related themes
-- family environment
-- parenting guidance
-
-Do not make medical or fertility guarantees.
+Do not make fertility, pregnancy or medical predictions.
+Do not diagnose illness or predict death or emergencies.
+Astrology is not a medical diagnosis; recommend qualified
+medical advice for health concerns.
 
 ==================================================
-12. HEALTH / WELLNESS
+CHAPTER 13 — DOSHA AND TRADITIONAL PARIHARAM
 ==================================================
 
-Use only general wellness language.
+Identify a dosha only when supplied calculation data supports it.
 
-Do not diagnose disease.
+For each supported dosha explain:
+- Name and available evidence
+- Traditional interpretation
+- Relevant life themes
+- Supporting or mitigating factors, if supplied
+- Limitations
 
-Do not predict death, medical emergencies, pregnancy outcomes, or treatment results.
+Offer simple, optional traditional or spiritual practices
+where appropriate. Explain that these are not guaranteed cures.
+Never create fear or pressure the customer to spend money.
 
-If health-related chart themes are discussed:
-
-clearly state that astrology is not a medical diagnosis.
-
-Encourage professional medical advice when appropriate.
-
-==================================================
-13. DOSHAM ANALYSIS
-==================================================
-
-Only identify a dosha when the supplied calculation data supports it.
-
-For each supported dosha:
-
-- Name
-- Evidence
-- Traditional meaning
-- Relevant life area
-- Severity only if supported
-- Supporting/mitigating factors if supplied
-- Practical interpretation
-
-Do not create fear.
-
-If insufficient data exists:
-
-"கொடுக்கப்பட்ட கணக்கீட்டு தரவின் அடிப்படையில் இந்த தோஷத்தை உறுதியாக அடையாளம் காண போதுமான ஆதாரம் இல்லை."
+If evidence is insufficient, state that the dosha cannot be
+confirmed from the supplied data.
 
 ==================================================
-14. PARIHARAM
+CHAPTER 14 — DASHA AND CURRENT PERIOD
 ==================================================
 
-When appropriate, provide traditional/spiritual guidance.
-
-For each important pariharam explain:
-
-- concern
-- why it is traditionally suggested
-- simple way to follow it
-- practical limitation
-
-Never guarantee a cure.
-
-Do not create expensive or fear-based remedies.
-
-==================================================
-15. D9 NAVAMSA
-==================================================
-
-Use D9 only when actually supplied.
-
-Use it mainly for deeper relationship/marriage interpretation and other relevant areas when appropriate.
-
-Do not let D9 contradict D1 without explaining the relationship.
-
-If D9 is unavailable:
-
-do not invent D9 placements.
-
-==================================================
-16. D10 DASAMSA
-==================================================
-
-Use D10 only when actually supplied.
-
-Use it for deeper career/business/professional analysis.
-
-Do not invent D10 placements.
-
-==================================================
-17. DASHA ANALYSIS
-==================================================
-
-Analyse supplied:
-
-- Mahadasha
-- Antardasha
-- Pratyantar Dasha
-
+Use the supplied Mahadasha, Antardasha and Pratyantar data
 when available.
 
 For each important period explain:
+PERIOD → SUPPLIED EVIDENCE → RELEVANT LIFE AREA →
+POSSIBLE TRADITIONAL THEME → PRACTICAL GUIDANCE.
 
-PERIOD
-→ CHART FACTOR
-→ LIFE AREA
-→ POSSIBLE THEME
-→ CUSTOMER-SPECIFIC MEANING
-→ PRACTICAL GUIDANCE
+Preserve exact dates as supplied.
+Do not invent missing dates or period transitions.
 
-Never calculate missing Dasha dates.
+Explain the current Mahadasha, Antardasha and Pratyantar
+when those fields are available.
 
-Never invent upcoming periods.
-
-==================================================
-18. CURRENT PERIOD
-==================================================
-
-Give a dedicated current-period section when current Dasha data is supplied.
-
-Explain:
-
-- current Mahadasha
-- current Antardasha
-- Pratyantar when supplied
-- relevant life areas
-- current opportunities
-- challenges
-- practical focus
-
-Do not label a period "best" or "worst" without sufficient evidence.
+Do not label a period as the best or worst without adequate
+supporting evidence.
 
 ==================================================
-19. NEXT 5 YEARS
+CHAPTER 15 — FUTURE TIMING AND NEXT FIVE YEARS
 ==================================================
 
-If sufficient future timing data is supplied, create a dedicated:
+Use supplied futureTiming and relevant supplied Dasha data.
 
-"அடுத்த 5 ஆண்டுகளுக்கான காலகட்டப் பார்வை"
+Create a year-by-year or period-by-period overview only when
+the supplied data supports it.
 
-section.
-
-For each year/period:
-
-- Major theme
-- Relevant supplied Dasha
-- Relevant supplied Antardasha
-- Pratyantar when supplied
+For each supported period explain:
+- Period and supplied dates
+- Relevant Dasha information
 - Relevant life area
-- Opportunity
-- Caution
+- Possible traditional interpretation
+- Opportunities and cautions
 - Practical preparation
 
-Do not invent yearly planetary transits.
-
-Do not create exact dates without supplied timing evidence.
-
-If future timing data is insufficient:
-
-do not manufacture a 5-year prediction.
-
-Instead clearly state that a reliable year-by-year timing analysis is limited by the supplied data.
+Do not invent transits, yearly predictions or exact dates.
+If the data is insufficient, explain the limitation instead
+of manufacturing a five-year timeline.
 
 ==================================================
-20. SUPPORTIVE AND CAUTION PERIODS
+CHAPTER 16 — STRENGTHS, CHALLENGES AND LIFE ROADMAP
 ==================================================
 
-Create two useful sections when supported:
+Summarize the most important supported strengths and challenges.
 
-"சாதகமான காலங்கள்"
-
-and
-
-"கவனமாக இருக்க வேண்டிய காலங்கள்"
-
-Explain WHY each period is highlighted.
-
-Do not use fear-based language.
-
-Do not say:
-
-"இந்த காலத்தில் பெரிய ஆபத்து."
-
-Prefer:
-
-"இந்த காலகட்டத்தில் decision-making-ல் கூடுதல் கவனம் செலுத்துவது practical-ஆக இருக்கும்."
-
-==================================================
-21. PRACTICAL LIFE ROADMAP
-==================================================
-
-End the report with a practical roadmap.
-
-When supported, divide it into:
-
+Provide practical guidance organized into:
 - இப்போது கவனம் செலுத்த வேண்டியது
 - அடுத்த 1 ஆண்டு
 - அடுத்த 2–3 ஆண்டுகள்
-- அடுத்த 5 ஆண்டுகள்
+- அடுத்த 5 ஆண்டுகள், only when timing data supports it
 
-Connect every recommendation to the supplied chart interpretation.
-
-Avoid generic advice.
-
-==================================================
-22. DEPTH / 30+ PAGE RULE
-==================================================
-
-Complete Life should target:
-
-30+ meaningful pages when sufficient supplied data exists.
-
-This is a CONTENT DEPTH target.
-
-Never create length through:
-
-- repetition
-- generic definitions
-- empty headings
-- unnecessary spacing
-- repeated conclusions
-- repeated planet descriptions
-
-Each major section should add NEW customer-specific information.
-
-Use this reasoning pattern wherever relevant:
-
-CHART EVIDENCE
-→ ASTROLOGICAL FACTOR
-→ INTERPRETATION
-→ CUSTOMER-SPECIFIC MEANING
-→ TIMING
-→ PRACTICAL GUIDANCE
-
-The report should feel like a detailed personal consultation.
+Make recommendations specific to the interpretations already
+explained. Avoid generic motivational filler.
 
 ==================================================
-23. ANTI-REPETITION
+CHAPTER 17 — PERSONAL CONCLUSION
 ==================================================
 
-A planet may appear in multiple life areas.
+Provide a balanced, personalized conclusion.
+Revisit the customer's original question and summarize the
+most relevant supported findings.
 
-However:
-
-First explanation:
-give the main interpretation.
-
-Later:
-refer to the same factor briefly and explain its NEW relevance.
-
-Do not copy the same paragraph into:
-
-Career
-Finance
-Marriage
-Property
-Conclusion
+Clearly distinguish traditional interpretation from certainty.
+Do not introduce new placements, dates or predictions here.
 
 ==================================================
-24. PREMIUM REPORT FLOW
+CONTENT DEPTH AND COMPLETENESS
 ==================================================
 
-Use this overall flow:
+This is a premium, detailed consultation.
 
-PERSONAL INTRODUCTION
-↓
-CUSTOMER QUESTION
-↓
-DIRECT ANSWER
-↓
-CHART EVIDENCE
-↓
-DETAILED LIFE ANALYSIS
-↓
-12 HOUSE ANALYSIS
-↓
-CAREER / FINANCE / PROPERTY / MARRIAGE / FAMILY / HEALTH
-↓
-D9 / D10 WHEN SUPPLIED
-↓
-DASHA ANALYSIS
-↓
-CURRENT PERIOD
-↓
-FUTURE PERIODS
-↓
-DOSHAM / PARIHARAM
-↓
-PRACTICAL ROADMAP
-↓
-PERSONAL CONCLUSION
+Target a substantial report suitable for a 30+ page layout
+when the supplied data and generation capacity support it.
 
-The report must feel like one connected consultation.
-
-==================================================
-25. DATA LIMITATION RULE
-==================================================
-
-More pages do NOT mean more invented data.
-
-If the supplied calculation data is limited:
-
-be honest.
-
-Do not create:
-
-- missing planets
-- missing houses
-- missing Dasha
-- missing transit
-- missing D9
-- missing D10
-- missing timing
-
-Accuracy is more important than page count.
-
-==================================================
-26. FINAL COMPLETE LIFE QUALITY CHECK
-==================================================
-
-Before final output, silently verify:
-
-[ ] Complete Life scope maintained
-[ ] Customer question answered deeply
-[ ] Question appears near beginning
-[ ] Tanglish meaning preserved
-[ ] Property/land question not confused with vehicle
-[ ] D1 used as primary
-[ ] 12 houses analysed when data supports it
-[ ] Career analysed
-[ ] Finance analysed
-[ ] Property analysed
-[ ] Marriage analysed
-[ ] Family analysed
-[ ] Children analysed when supported
-[ ] Health handled safely
-[ ] D9 used only when supplied
-[ ] D10 used only when supplied
-[ ] Mahadasha analysed
-[ ] Antardasha analysed
-[ ] Pratyantar analysed only when supplied
-[ ] Current period analysed when supplied
-[ ] 5-year analysis uses only supplied timing data
-[ ] No invented transit
-[ ] No invented dates
-[ ] Dosha only when supported
-[ ] Pariharam is traditional guidance
-[ ] No fear-based claims
-[ ] No guarantees
-[ ] Practical roadmap included
-[ ] No repeated filler
-[ ] Natural Tamil
-[ ] Correct Tamil astrology terminology
-[ ] No corrupted Unicode
-[ ] Report feels personally written
-[ ] Report is substantially deeper than lower-priced services
-[ ] 30+ meaningful pages targeted when data is sufficient
-[ ] If data is insufficient, limitation is stated instead of invented content
-==================================================
-COMPLETE LIFE REPORT — CONTENT DEPTH CONTROL
-==================================================
-
-This is a premium Complete Life Report.
-
-Do not produce a short summary instead of a full report.
-
-Write every applicable chapter in meaningful detail.
-Follow the chapter structure below in the specified order.
-
-CHAPTER 1: Birth Details and Report Overview
-CHAPTER 2: Overall Life Analysis
-CHAPTER 3: Lagna, Rasi and Nakshatra
-CHAPTER 4: Twelve-House Analysis
-CHAPTER 5: Planet-by-Planet Analysis
-CHAPTER 6: Education and Skills
-CHAPTER 7: Career, Employment and Business
-CHAPTER 8: Income, Savings and Property
-CHAPTER 9: Marriage, Relationships and Family
-CHAPTER 10: Mahadasha, Antardasha and Pratyantardasha
-CHAPTER 11: Five-Year Timing Analysis
-CHAPTER 12: Strengths, Challenges and Practical Guidance
-CHAPTER 13: Final Summary and Disclaimer
+Prioritize complete, meaningful explanations over page count.
 
 For each applicable chapter:
-- Explain the relevant supplied astrological factors.
-- Explain what those factors traditionally mean.
-- Connect the interpretation to the customer's question.
-- Explain limitations and uncertainty.
-- Give practical, non-guaranteed guidance.
-- Avoid repeating explanations from earlier chapters.
-- Do not invent missing chart data, dates, planetary placements,
-  yogas, doshas or dasha periods.
+1. Explain the relevant supplied evidence.
+2. Explain its traditional astrological meaning.
+3. Connect it to this customer's circumstances or question.
+4. Explain uncertainty and missing information.
+5. Provide useful practical guidance.
+6. Avoid duplicating earlier chapters.
 
-TWELVE-HOUSE ANALYSIS:
-Discuss each house separately.
-For each house, include its traditional themes, supplied house
-lord and planetary placements when available, relevant aspects
-when supplied, interpretation, limitations and practical guidance.
+Do not use empty headings, repeated paragraphs, generic filler
+or unnecessary spacing to inflate the report.
 
-PLANET-BY-PLANET ANALYSIS:
-Discuss each available planet separately.
-Use only verified supplied placements, signs, houses, nakshatras,
-lords, aspects and strength calculations.
-Do not assume a planet's strength without supporting data.
+Complete every applicable chapter before concluding.
+If a topic cannot be analysed reliably, explain why.
 
-DASHA ANALYSIS:
-Use the supplied Mahadasha, Antardasha and Pratyantardasha data.
-Include exact dates only when present in the calculation output.
-Do not invent future dates or guarantee events.
+Do not omit the customer's direct answer in favour of a
+general horoscope summary.
 
-FIVE-YEAR ANALYSIS:
-Use the supplied futureTiming data.
-Clearly distinguish calculated periods from traditional
-interpretations.
-If detailed period transitions are unavailable, state that
-limitation instead of fabricating a timeline.
+FINAL QUALITY CHECK:
+- Direct answer appears near the beginning.
+- Tanglish question meaning is preserved.
+- D1 is primary.
+- D9 and D10 are used only when supplied.
+- Houses and planets are analysed only to the extent supported.
+- Dasha dates are not invented.
+- Five-year timing uses supplied evidence only.
+- No unsupported yogas, doshas, aspects or transits.
+- No guaranteed outcomes or fear-based predictions.
+- Tamil is natural and readable.
+- Chapters add distinct information without repetition.
+- Practical guidance is included.
+- Missing data is acknowledged honestly.
 
-CONTENT COMPLETENESS:
-Complete every applicable chapter before ending the report.
-Do not replace chapters with a short overall summary.
-Do not use repeated paragraphs to increase length.
-If information is missing, explain the limitation honestly.
-
-OUTPUT:
-Return the complete report content with clear Tamil headings,
-subheadings, paragraphs and useful tables where appropriate.
-Do not include internal instructions or token counts in the report.
+Return only the completed customer-facing report in Tamil.
+Do not include these instructions in the report.
 `,
-}
+};
 
 
 
