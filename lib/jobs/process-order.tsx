@@ -2662,10 +2662,137 @@ console.log(
 );
 console.log("========================================");
 
-const report = await generateReport(
-  reportInput,
-  finalPrompt
-);
+let report: { model: string; text: string };
+
+if (isCompleteLifeReport) {
+  // Complete Life: generate six detailed sections sequentially.
+  const completeLifeSections = [
+    {
+      title: "பகுதி 1 — அறிமுகம் மற்றும் ஜாதக அடிப்படை",
+      chapters: `
+1. Personal Introduction
+2. Direct Answer to Customer Questions
+3. Overall Life Patterns
+4. Lagna, Rasi and Nakshatra
+`,
+    },
+    {
+      title: "பகுதி 2 — பன்னிரண்டு பாவங்கள்",
+      chapters: `
+5. Detailed Analysis of All 12 Houses
+6. Planet-by-Planet Analysis
+`,
+    },
+    {
+      title: "பகுதி 3 — கல்வி மற்றும் தொழில்",
+      chapters: `
+7. Education, Skills and Learning
+8. Career, Employment and Business
+`,
+    },
+    {
+      title: "பகுதி 4 — பணம் மற்றும் குடும்பம்",
+      chapters: `
+9. Finance, Savings and Wealth
+10. Property, Land and Home
+11. Marriage, Relationships and Family
+`,
+    },
+    {
+      title: "பகுதி 5 — வாழ்க்கை மற்றும் தசா",
+      chapters: `
+12. Children, Family Responsibilities and Wellbeing
+13. Dosha and Practical Pariharam
+14. Mahadasha, Antardasha and Current Period
+`,
+    },
+    {
+      title: "பகுதி 6 — காலக்கணிப்பு மற்றும் முடிவுரை",
+      chapters: `
+15. Future Timing and Next Five Years
+16. Strengths, Challenges and Practical Roadmap
+17. Personal Conclusion
+`,
+    },
+  ];
+
+  const generatedParts: string[] = [];
+  let reportModel = "";
+
+  for (let i = 0; i < completeLifeSections.length; i++) {
+    const section = completeLifeSections[i];
+
+    console.log(
+      `COMPLETE LIFE: Generating section ${i + 1}/${completeLifeSections.length}: ${section.title}`
+    );
+
+    const sectionPrompt = `
+${finalPrompt}
+
+==================================================
+MULTI-PART COMPLETE LIFE REPORT
+==================================================
+
+This is section ${i + 1} of ${completeLifeSections.length}.
+Section title: ${section.title}
+
+Write ONLY the chapters assigned to this section:
+
+${section.chapters}
+
+CONTENT REQUIREMENTS:
+
+- Write detailed, personalized Tamil prose for every assigned chapter.
+- Target approximately 1200–1600 Tamil words for this section,
+  where the available chart data supports that level of detail.
+- Use clear chapter headings and meaningful subheadings.
+- Explain the supplied chart factors and how they relate to
+  the customer's life in understandable Tamil.
+- Give practical, realistic guidance where relevant.
+- Answer the customer's actual questions directly when relevant.
+- Do not repeat material from earlier sections.
+- Do not write chapters assigned to other sections.
+- Do not invent planetary positions, yogas, doshas, dates,
+  dasha periods, or predictions.
+- Use D1 as the primary chart. Use D9 or D10 only if supplied.
+- Use actual supplied dasha dates when discussing timing.
+- If information is missing, state the limitation honestly.
+- Do not guarantee future events or frighten the customer.
+- Do not include a preface explaining that this is one section.
+- Return only the customer-facing report content in Tamil.
+`;
+
+    const partReport = await generateReport(
+      reportInput,
+      sectionPrompt
+    );
+
+    if (!partReport.text || !partReport.text.trim()) {
+      throw new Error(
+        `Complete Life section ${i + 1} returned empty content`
+      );
+    }
+
+    if (!reportModel) {
+      reportModel = partReport.model;
+    }
+
+    generatedParts.push(partReport.text.trim());
+
+    console.log(
+      `COMPLETE LIFE SECTION ${i + 1} WORDS:`,
+      partReport.text.split(/\s+/).filter(Boolean).length
+    );
+  }
+
+  report = {
+    model: reportModel,
+    text: generatedParts.join("\n\n"),
+  };
+} else {
+  // Keep all other report services on their existing flow.
+  report = await generateReport(reportInput, finalPrompt);
+}
 
 if (!report.text || !report.text.trim()) {
   throw new Error(
