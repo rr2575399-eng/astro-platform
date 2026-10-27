@@ -1132,18 +1132,15 @@ if (vimshottari.fullCycle.length === 0) {
   );
 }
 
-for (const period of vimshottari.fullCycle) {
-  const start = new Date(period.startDate).getTime();
-  const end = new Date(period.endDate).getTime();
+console.log(
+  "FIRST DASHA PERIOD:",
+  JSON.stringify(vimshottari.fullCycle[0], null, 2)
+);
 
-  if (!Number.isFinite(start) || !Number.isFinite(end)) {
-    throw new Error("Invalid Vimshottari Dasha date");
-  }
-
-  if (end <= start) {
-    throw new Error("Invalid Vimshottari Dasha period range");
-  }
-}
+console.log(
+  "DASHA PERIOD KEYS:",
+  Object.keys(vimshottari.fullCycle[0] ?? {})
+);
 
 const sortedDashaPeriods = [...vimshottari.fullCycle]
   .sort(
