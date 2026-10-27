@@ -126,6 +126,7 @@ export function buildFiveYearTiming(
 
 export interface AstrologyCalculation {
   ascendant: string;
+  ascendantLord: string;
   moonSign: string;
   nakshatra: string;
   pada: number;
@@ -176,6 +177,55 @@ const RASHIS: string[] = [
   "Kumbha",
   "Meena",
 ];
+
+const SIGN_LORDS: Record<string, string> = {
+  Mesha: "Mars",
+  Vrishabha: "Venus",
+  Mithuna: "Mercury",
+  Karka: "Moon",
+  Simha: "Sun",
+  Kanya: "Mercury",
+  Tula: "Venus",
+  Vrischika: "Mars",
+  Dhanu: "Jupiter",
+  Makara: "Saturn",
+  Kumbha: "Saturn",
+  Meena: "Jupiter",
+};
+
+function getAscendantLord(sign: string): string {
+  const normalized = sign.trim().toLowerCase();
+
+  const aliases: Record<string, string> = {
+    aries: "Mesha",
+    taurus: "Vrishabha",
+    gemini: "Mithuna",
+    cancer: "Karka",
+    leo: "Simha",
+    virgo: "Kanya",
+    libra: "Tula",
+    scorpio: "Vrischika",
+    sagittarius: "Dhanu",
+    capricorn: "Makara",
+    aquarius: "Kumbha",
+    pisces: "Meena",
+  };
+
+  const canonical =
+    aliases[normalized] ??
+    RASHIS.find(
+      (rashi) => rashi.toLowerCase() === normalized
+    );
+
+  if (!canonical || !SIGN_LORDS[canonical]) {
+    throw new Error(
+      `Cannot determine ascendant lord for sign: ${sign}`
+    );
+  }
+
+  return SIGN_LORDS[canonical];
+}
+
 
 /* =========================================================
    SAFE NUMBER
@@ -766,6 +816,10 @@ console.log(JSON.stringify(kundli?.ascendant, null, 2));
       kundli?.ascendant
     ) ||
     "Mesha";
+const ascendantLord = getAscendantLord(ascendant);
+
+console.log("ASCENDANT:", ascendant);
+console.log("ASCENDANT LORD:", ascendantLord); 
 
   /* =======================================================
      8. MOON
@@ -1066,6 +1120,52 @@ const panchangam: any =
 const vimshottari =
   panchangam?.vimshottariDasha;
 
+  if (!Array.isArray(vimshottari?.fullCycle)) {
+  throw new Error(
+    "Vimshottari Dasha fullCycle is missing or invalid"
+  );
+}
+
+if (vimshottari.fullCycle.length === 0) {
+  throw new Error(
+    "Vimshottari Dasha fullCycle is empty"
+  );
+}
+
+for (const period of vimshottari.fullCycle) {
+  const start = new Date(period.startDate).getTime();
+  const end = new Date(period.endDate).getTime();
+
+  if (!Number.isFinite(start) || !Number.isFinite(end)) {
+    throw new Error("Invalid Vimshottari Dasha date");
+  }
+
+  if (end <= start) {
+    throw new Error("Invalid Vimshottari Dasha period range");
+  }
+}
+
+const sortedDashaPeriods = [...vimshottari.fullCycle]
+  .sort(
+    (a, b) =>
+      new Date(a.startDate).getTime() -
+      new Date(b.startDate).getTime()
+  );
+
+for (let i = 1; i < sortedDashaPeriods.length; i++) {
+  const previous = sortedDashaPeriods[i - 1];
+  const current = sortedDashaPeriods[i];
+
+  if (
+    new Date(current.startDate).getTime() <
+    new Date(previous.startDate).getTime()
+  ) {
+    throw new Error(
+      "Vimshottari Dasha periods are not chronological"
+    );
+  }
+}
+
 console.log(
   "VIMSHOTTARI DASHA:",
   JSON.stringify(
@@ -1213,6 +1313,7 @@ console.log(JSON.stringify(kundli?.vargas?.d10, null, 2));
 const futureTiming = buildFiveYearTiming(dashas);
 return {
   ascendant,
+  ascendantLord,
   moonSign,
   nakshatra,
   pada,

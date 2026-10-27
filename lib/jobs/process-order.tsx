@@ -2606,6 +2606,19 @@ CUSTOMER + ASTROLOGY INPUT
 Use only the customer, birth details, astrology calculation
 data, and customer questions supplied to the AI.
 
+==================================================
+ASTROLOGY ACCURACY RULES
+==================================================
+
+- Use astrology.ascendantLord as the source of truth
+  for the ascendant lord, when this field is supplied.
+- Never identify a different planet as the ascendant lord.
+- Do not infer or invent missing planetary positions.
+- Use the supplied astrology data as the source of truth.
+- If a required field is missing, clearly state the limitation.
+- Do not claim that an astrology calculation was verified
+  unless the supplied data supports that claim.
+
 Do not invent missing data.
 `;
 const isCompleteLifeReport =
