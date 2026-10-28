@@ -381,66 +381,65 @@ If only current Mahadasha/Antardasha is supplied:
 limit timing analysis accordingly.
 
 ==================================================
-10. TIMING ANALYSIS
+10. TIMING ANALYSIS — DIRECT CUSTOMER ANSWER
 ==================================================
 
-If customer asks:
+If the customer asks a timing question such as:
 - எப்போது?
 - eppo?
-- when?
-- how soon?
-- எந்த காலத்தில்?
-- which period?
 - marriage eppo?
 - job eppo?
 - property eppo?
-- business eppo?
+- when will I buy land?
+- when will I get a job?
 
-Timing must receive direct attention.
+The answer must appear near the beginning of the report.
 
-Use:
+Use this exact reasoning order:
 
-CURRENT PERIOD
-→ RELEVANT LIFE AREA
-→ RELEVANT CHART FACTORS
-→ CURRENT DASHA
-→ SUPPLIED UPCOMING PERIODS
-→ WHY THE PERIOD MATTERS
-→ EXPECTED THEME
-→ PRACTICAL PREPARATION
-→ LIMITATION
+1. Restate the customer's intended question correctly.
+2. Give a direct answer based on the supplied data.
+3. Identify the supplied chart factors relevant to that question.
+4. Identify the supplied current Mahadasha and Antardasha.
+5. Use upcoming periods only if their dates are supplied and valid.
+6. Explain why the supplied factors are relevant.
+7. Give practical preparation advice.
+8. Clearly state limitations.
 
-Give the narrowest timing supported by supplied data.
+TIMING EVIDENCE RULES:
 
-If only Antardasha is supplied:
-use Antardasha-level timing.
+- Use only valid dates supplied by the astrology engine.
+- Use the current date only to identify which supplied period is active.
+- Never treat a past period as an upcoming period.
+- Never invent a future Dasha or Antardasha.
+- Never assume that a Dasha automatically guarantees an event.
+- Do not give a specific year or date unless the supplied data supports discussing that period.
+- Do not repeat general astrology explanations instead of answering the question.
 
-If Pratyantardasha is supplied:
-Pratyantardasha-level timing may be discussed.
+WHEN TIMING DATA IS INSUFFICIENT:
 
-If transit data is supplied:
-transit may be used.
+State clearly:
 
-If transit data is NOT supplied:
-do not invent transit movements.
+"கொடுக்கப்பட்ட ஜாதகக் கணக்கீட்டுத் தரவின் அடிப்படையில், குறிப்பிட்ட காலத்தை நம்பகமாகச் சுட்டிக்காட்டப் போதுமான தகவல் இல்லை."
 
-Never create an exact date merely to satisfy the customer.
+Then explain which relevant timing information is available and what is missing.
 
-Never say:
-- 100%
-- நிச்சயம்
-- கண்டிப்பாக
-- உறுதி
-- இந்த தேதியில் தான்
-- வேலை உறுதி
-- திருமணம் உறுதி
-- பணம் கண்டிப்பாக வரும்
+WHEN TIMING DATA IS SUFFICIENT:
 
-Use:
-- "இந்த காலகட்டம் supportive-ஆக இருக்கலாம்"
-- "வாய்ப்பு அதிகரிக்கக்கூடிய காலமாகத் தெரிகிறது"
-- "கொடுக்கப்பட்ட chart factors அடிப்படையில்"
-- "இது astrology-based indication மட்டுமே"
+Give the narrowest reasonable period supported by the supplied chart data.
+
+Explain:
+- The period being discussed
+- The relevant supplied evidence
+- Why that period is being highlighted
+- What the customer can practically prepare for
+
+Do not claim certainty.
+
+Never use a long generic introduction to avoid answering the customer's question.
+
+The direct answer must be clear, concise, and near the beginning of the report.
+==================================================
 
 ==================================================
 11. ADVANCED TIMING CROSS-CHECK
@@ -2650,6 +2649,10 @@ const reportInput = {
 };
 
 const reportInputText = JSON.stringify(reportInput);
+console.log("CURRENT MAHADASHA:", chartForReport.currentMahadasha);
+console.log("CURRENT ANTARDASHA:", chartForReport.currentAntardasha);
+console.log("CURRENT PRATYANTAR:", chartForReport.currentPratyantar);
+console.log("FUTURE TIMING:", chartForReport.futureTiming);
 
 console.log("========== REPORT SIZE CHECK ==========");
 console.log("SERVICE SLUG:", normalizedServiceSlug);
