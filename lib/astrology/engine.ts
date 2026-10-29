@@ -82,7 +82,7 @@ export function buildFiveYearTiming(
       continue;
     }
 
-    const midpoint = yearStart + (yearEnd - yearStart) / 2;
+   const referenceTime = yearStart;
 
     const activeMahadasha = dashas.find((d) => {
       if (d.level !== "MAHADASHA") return false;
@@ -90,7 +90,7 @@ export function buildFiveYearTiming(
       const start = new Date(d.startDate).getTime();
       const end = new Date(d.endDate).getTime();
 
-      return midpoint >= start && midpoint < end;
+      return referenceTime >= start && referenceTime < end;
     });
 
     const activeAntardasha = dashas.find((d) => {
@@ -99,7 +99,7 @@ export function buildFiveYearTiming(
       const start = new Date(d.startDate).getTime();
       const end = new Date(d.endDate).getTime();
 
-      return midpoint >= start && midpoint < end;
+      return referenceTime >= start && referenceTime < end;
     });
 
     const activePratyantar = dashas.find((d) => {
@@ -108,7 +108,7 @@ export function buildFiveYearTiming(
       const start = new Date(d.startDate).getTime();
       const end = new Date(d.endDate).getTime();
 
-      return midpoint >= start && midpoint < end;
+      return referenceTime >= start && referenceTime < end;
     });
 
     result.push({
