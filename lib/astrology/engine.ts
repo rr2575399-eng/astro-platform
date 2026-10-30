@@ -1133,6 +1133,29 @@ if (vimshottari.fullCycle.length === 0) {
 }
 
 console.log(
+  "LIBRARY CURRENT ANTARDASHA:",
+  JSON.stringify(
+    vimshottari?.currentAntardasha,
+    null,
+    2
+  )
+);
+
+console.log(
+  "LIBRARY CURRENT MAHADASHA:",
+  JSON.stringify(
+    vimshottari?.currentMahadasha,
+    null,
+    2
+  )
+);
+
+console.log(
+  "BIRTH DATE UTC:",
+  date.toISOString()
+);
+
+console.log(
   "FIRST DASHA PERIOD:",
   JSON.stringify(vimshottari.fullCycle[0], null, 2)
 );
