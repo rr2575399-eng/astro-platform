@@ -1142,26 +1142,33 @@ console.log(
   Object.keys(vimshottari.fullCycle[0] ?? {})
 );
 
-const sortedDashaPeriods = [...vimshottari.fullCycle]
-  .sort(
-    (a, b) =>
-      new Date(a.startDate).getTime() -
-      new Date(b.startDate).getTime()
-  );
-
-for (let i = 1; i < sortedDashaPeriods.length; i++) {
-  const previous = sortedDashaPeriods[i - 1];
-  const current = sortedDashaPeriods[i];
+for (const period of vimshottari.fullCycle) {
+  const start = new Date(period.startTime).getTime();
+  const end = new Date(period.endTime).getTime();
 
   if (
-    new Date(current.startDate).getTime() <
-    new Date(previous.startDate).getTime()
+    !Number.isFinite(start) ||
+    !Number.isFinite(end) ||
+    end <= start
+  ) {
+    throw new Error("Invalid Vimshottari Dasha period");
+  }
+}
+
+for (let i = 1; i < vimshottari.fullCycle.length; i++) {
+  const previous = vimshottari.fullCycle[i - 1];
+  const current = vimshottari.fullCycle[i];
+
+  if (
+    new Date(current.startTime).getTime() <
+    new Date(previous.startTime).getTime()
   ) {
     throw new Error(
       "Vimshottari Dasha periods are not chronological"
     );
   }
 }
+
 
 console.log(
   "VIMSHOTTARI DASHA:",
@@ -1183,51 +1190,54 @@ console.log(
 
 const dashas: DashaPeriod[] = [];
 
-if (Array.isArray(vimshottari?.fullCycle)) {
-  for (const period of vimshottari.fullCycle) {
-    if (
-      period?.planet &&
-      period?.startTime &&
-      period?.endTime
-    ) {
-      const mahadashaPlanet = String(period.planet);
-      const startDate = String(period.startTime);
-      const endDate = String(period.endTime);
+for (const period of vimshottari.fullCycle) {
+  if (
+    !period?.planet ||
+    !period?.startTime ||
+    !period?.endTime
+  ) {
+    throw new Error("Invalid Mahadasha period data");
+  }
 
-      // Mahadasha
-      dashas.push({
-        planet: mahadashaPlanet,
-        startDate,
-        endDate,
-        level: "MAHADASHA",
-      });
+  const mahadashaPlanet = String(period.planet);
+  const startDate = String(period.startTime);
+  const endDate = String(period.endTime);
 
-      // Antardashas inside this Mahadasha
- const antardashas = getAntardashaPeriods(
-  mahadashaPlanet,
-  startDate,
-  endDate
-);
+  // Mahadasha
+  dashas.push({
+    planet: mahadashaPlanet,
+    startDate,
+    endDate,
+    level: "MAHADASHA",
+  });
 
-for (const antardasha of antardashas) {
-  dashas.push(antardasha);
+  // Antardasha
+  const antardashas = getAntardashaPeriods(
+    mahadashaPlanet,
+    startDate,
+    endDate
+  );
 
-  const pratyantarDashas =
-    getPratyantarDashaPeriods(
-      antardasha.planet,
-      antardasha.startDate,
-      antardasha.endDate
-    );
+  for (const antardasha of antardashas) {
+    dashas.push(antardasha);
 
-  dashas.push(...pratyantarDashas);
+    // Pratyantardasha
+    const pratyantarDashas =
+      getPratyantarDashaPeriods(
+        antardasha.planet,
+        antardasha.startDate,
+        antardasha.endDate
+      );
+
+    dashas.push(...pratyantarDashas);
+  }
 }
 
 // Close period loop
-}
+
 
 // Close fullCycle if
-}
-}
+
 
 const currentDate = new Date();
 
