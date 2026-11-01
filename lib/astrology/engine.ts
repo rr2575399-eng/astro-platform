@@ -1213,7 +1213,15 @@ console.log(
 
 const dashas: DashaPeriod[] = [];
 
-for (const period of vimshottari.fullCycle) {
+const MS_PER_YEAR = 365.25 * 24 * 60 * 60 * 1000;
+
+for (
+  let periodIndex = 0;
+  periodIndex < vimshottari.fullCycle.length;
+  periodIndex++
+) {
+  const period = vimshottari.fullCycle[periodIndex];
+
   if (
     !period?.planet ||
     !period?.startTime ||
@@ -1223,10 +1231,10 @@ for (const period of vimshottari.fullCycle) {
   }
 
   const mahadashaPlanet = String(period.planet);
-  const startDate = String(period.startTime);
-  const endDate = String(period.endTime);
+  const startDate = new Date(period.startTime).toISOString();
+  const endDate = new Date(period.endTime).toISOString();
 
-  // Mahadasha
+  // Mahadasha display period
   dashas.push({
     planet: mahadashaPlanet,
     startDate,
@@ -1234,17 +1242,33 @@ for (const period of vimshottari.fullCycle) {
     level: "MAHADASHA",
   });
 
-  // Antardasha
+  // First Mahadasha is only the remaining balance at birth.
+  // Reconstruct its original full 17-year period.
+  const fullMahadashaStart =
+    periodIndex === 0
+      ? new Date(
+          new Date(period.endTime).getTime() -
+            17 * MS_PER_YEAR
+        ).toISOString()
+      : startDate;
+
   const antardashas = getAntardashaPeriods(
     mahadashaPlanet,
-    startDate,
+    fullMahadashaStart,
     endDate
   );
 
   for (const antardasha of antardashas) {
+    // Skip Antardashas that ended before birth.
+    if (
+      new Date(antardasha.endDate).getTime() <=
+      new Date(startDate).getTime()
+    ) {
+      continue;
+    }
+
     dashas.push(antardasha);
 
-    // Pratyantardasha
     const pratyantarDashas =
       getPratyantarDashaPeriods(
         antardasha.planet,
@@ -1252,7 +1276,14 @@ for (const period of vimshottari.fullCycle) {
         antardasha.endDate
       );
 
-    dashas.push(...pratyantarDashas);
+    for (const pratyantar of pratyantarDashas) {
+      if (
+        new Date(pratyantar.endDate).getTime() >
+        new Date(startDate).getTime()
+      ) {
+        dashas.push(pratyantar);
+      }
+    }
   }
 }
 
@@ -1260,7 +1291,22 @@ for (const period of vimshottari.fullCycle) {
 
 
 // Close fullCycle if
+const birthTime = new Date(
+  vimshottari.fullCycle[0].startTime
+).getTime();
 
+console.log(
+  "FIRST MAHADASHA ANTARDASHA TEST:",
+  JSON.stringify(
+    dashas.filter(
+      (d) =>
+        d.level === "ANTARDASHA" &&
+        new Date(d.endDate).getTime() > birthTime
+    ).slice(0, 4),
+    null,
+    2
+  )
+);
 
 const currentDate = new Date();
 
