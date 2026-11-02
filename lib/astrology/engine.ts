@@ -1308,6 +1308,22 @@ console.log(
   )
 );
 
+console.log(
+  "PRATYANTAR AROUND BIRTH:",
+  JSON.stringify(
+    dashas.filter((d) => {
+      if (d.level !== "PRATYANTARDASHA") return false;
+
+      const start = new Date(d.startDate).getTime();
+      const end = new Date(d.endDate).getTime();
+
+      return start <= birthTime && birthTime < end;
+    }),
+    null,
+    2
+  )
+);
+
 const currentDate = new Date();
 
 const currentMahadasha = dashas.find((d) => {
