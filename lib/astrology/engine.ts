@@ -1362,6 +1362,15 @@ const currentPratyantar = dashas.find((d) => {
 });
 
 console.log(
+  "CURRENT PRATYANTARDASHA:",
+  JSON.stringify(
+    currentPratyantar,
+    null,
+    2
+  )
+);
+
+console.log(
   "CURRENT MAHADASHA:",
   JSON.stringify(
     currentMahadasha,
