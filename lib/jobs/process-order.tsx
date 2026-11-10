@@ -6,6 +6,11 @@ import {
   uploadStorage,
 } from "@/lib/server/db";
 
+import {
+  buildAstrologyBrainContext,
+  createAstrologyBrainPrompt,
+} from "@/lib/ai/astrology-brain";
+
 import { calculateChart } from "@/lib/astrology/engine";
 import { generateReport } from "@/lib/ai/report";
 import { buildReportHtml } from "@/lib/pdf/report-html";
@@ -2648,6 +2653,42 @@ const reportInput = {
   questions: order.questions,
 };
 
+const brainContext = buildAstrologyBrainContext({
+  serviceSlug: normalizedServiceSlug,
+  customerQuestion: Array.isArray(order.questions)
+    ? order.questions
+    : [],
+  chart: {
+    planets: chartForReport.planets ?? [],
+    houses: chartForReport.houses ?? [],
+    dashas: chartForReport.dashas ?? [],
+    currentMahadasha: chartForReport.currentMahadasha,
+    currentAntardasha: chartForReport.currentAntardasha,
+    currentPratyantar: chartForReport.currentPratyantar,
+    d9: chartForReport.d9,
+    d10: chartForReport.d10,
+    birthTimeKnown: chartForReport.birthTimeKnown,
+    ascendant: chartForReport.ascendant,
+    ascendantLord: chartForReport.ascendantLord,
+    moonSign: chartForReport.moonSign,
+    nakshatra: chartForReport.nakshatra,
+    pada: chartForReport.pada,
+  },
+});
+
+const astrologyBrainPrompt =
+  createAstrologyBrainPrompt(brainContext);
+
+const enhancedPrompt = `
+${finalPrompt}
+
+==================================================
+OUR ASTROLOGY AI BRAIN RULES
+==================================================
+
+${astrologyBrainPrompt}
+`;
+
 const reportInputText = JSON.stringify(reportInput);
 console.log("CURRENT MAHADASHA:", chartForReport.currentMahadasha);
 console.log("CURRENT ANTARDASHA:", chartForReport.currentAntardasha);
@@ -2742,8 +2783,8 @@ if (isCompleteLifeReport) {
       `COMPLETE LIFE: Generating section ${i + 1}/${completeLifeSections.length}: ${section.title}`
     );
 
-    const sectionPrompt = `
-${finalPrompt}
+ const sectionPrompt = `
+${enhancedPrompt}
 
 ==================================================
 MULTI-PART COMPLETE LIFE REPORT
@@ -2807,7 +2848,7 @@ CONTENT REQUIREMENTS:
   };
 } else {
   // Keep all other report services on their existing flow.
-  report = await generateReport(reportInput, finalPrompt);
+  report = await generateReport(reportInput, enhancedPrompt);
 }
 
 if (!report.text || !report.text.trim()) {

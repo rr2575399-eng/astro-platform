@@ -1244,13 +1244,22 @@ for (
 
   // First Mahadasha is only the remaining balance at birth.
   // Reconstruct its original full 17-year period.
-  const fullMahadashaStart =
-    periodIndex === 0
-      ? new Date(
-          new Date(period.endTime).getTime() -
-            17 * MS_PER_YEAR
-        ).toISOString()
-      : startDate;
+  const fullMahadashaYears =
+  VIMSHOTTARI_YEARS[mahadashaPlanet];
+
+if (!fullMahadashaYears) {
+  throw new Error(
+    `Unknown Mahadasha planet: ${mahadashaPlanet}`
+  );
+}
+
+const fullMahadashaStart =
+  periodIndex === 0
+    ? new Date(
+        new Date(period.endTime).getTime() -
+          fullMahadashaYears * MS_PER_YEAR
+      ).toISOString()
+    : startDate;
 
   const antardashas = getAntardashaPeriods(
     mahadashaPlanet,
