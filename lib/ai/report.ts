@@ -31,6 +31,14 @@ export async function generateReport(
   "AI INPUT CHARACTERS:",
   inputText.length
 );
+console.log(
+  "AI SYSTEM PROMPT CHARACTERS:",
+  prompt.length
+);
+console.log(
+  "AI TOTAL INPUT CHARACTERS:",
+  inputText.length + prompt.length
+);
   // --------------------------------------------------------
   // RETRY LOGIC — 3 attempts
   // --------------------------------------------------------
@@ -108,19 +116,37 @@ export async function generateReport(
       if (!res.ok) {
         const errorBody = await res.text();
 
-        // Rate limit — wait and retry
+        // Rate limit — respect Gemini retryDelay
         if (
           res.status === 429 &&
           attempt < MAX_ATTEMPTS
         ) {
-          const waitMs = attempt * 3000;
+          let waitMs = attempt * 10000;
+
+          try {
+            const retryMatch = errorBody.match(
+              /"retryDelay"\s*:\s*"(\d+)s"/
+            );
+
+            if (retryMatch) {
+              waitMs = Number(retryMatch[1]) * 1000;
+            }
+          } catch {
+            console.warn("Could not parse Gemini retry delay.");
+          }
+
+          // Add 2 seconds safety buffer
+          waitMs += 2000;
+
           console.warn(
-            `Gemini rate limited. Attempt ${attempt}.` +
-            ` Waiting ${waitMs}ms...`
+            `Gemini rate limited. Attempt ${attempt}. ` +
+            `Waiting ${Math.ceil(waitMs / 1000)} seconds...`
           );
-          await new Promise((r) =>
-            setTimeout(r, waitMs)
+
+          await new Promise((resolve) =>
+            setTimeout(resolve, waitMs)
           );
+
           continue;
         }
 
