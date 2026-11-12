@@ -218,14 +218,6 @@ ${result.rules.map((rule, index) => `${index + 1}. ${rule}`).join("\n")}
 DATA AVAILABILITY:
 ${JSON.stringify(result.availableData, null, 2)}
 
-CUSTOMER SERVICE:
-${context.service}
-
-CUSTOMER QUESTIONS:
-${context.questions.join("\n")}
-
-ASTROLOGY DATA:
-${JSON.stringify(context.astrologyData, null, 2)}
 PLANETARY RELATIONSHIP ANALYSIS:
 ${JSON.stringify(context.planetaryRelationships, null, 2)}
 
