@@ -78,47 +78,84 @@ export function buildFiveYearTiming(
       endTime
     );
 
-    if (yearStart >= yearEnd) {
-      continue;
+    if (yearStart >= yearEnd) continue;
+
+    // Collect every Dasha start and end date
+    const boundaries = new Set<number>([
+      yearStart,
+      yearEnd,
+    ]);
+
+    for (const dasha of dashas) {
+      const start = new Date(dasha.startDate).getTime();
+      const end = new Date(dasha.endDate).getTime();
+
+      if (
+        Number.isFinite(start) &&
+        start > yearStart &&
+        start < yearEnd
+      ) {
+        boundaries.add(start);
+      }
+
+      if (
+        Number.isFinite(end) &&
+        end > yearStart &&
+        end < yearEnd
+      ) {
+        boundaries.add(end);
+      }
     }
 
-   const referenceTime = yearStart;
+    const sortedBoundaries = [...boundaries].sort(
+      (a, b) => a - b
+    );
 
-    const activeMahadasha = dashas.find((d) => {
-      if (d.level !== "MAHADASHA") return false;
+    // Create separate periods whenever a Dasha changes
+    for (let i = 0; i < sortedBoundaries.length - 1; i++) {
+      const segmentStart = sortedBoundaries[i];
+      const segmentEnd = sortedBoundaries[i + 1];
 
-      const start = new Date(d.startDate).getTime();
-      const end = new Date(d.endDate).getTime();
+      if (segmentStart >= segmentEnd) continue;
 
-      return referenceTime >= start && referenceTime < end;
-    });
+      const referenceTime =
+        segmentStart + (segmentEnd - segmentStart) / 2;
 
-    const activeAntardasha = dashas.find((d) => {
-      if (d.level !== "ANTARDASHA") return false;
+      const findActiveDasha = (
+        level: DashaPeriod["level"]
+      ) =>
+        dashas.find((d) => {
+          if (d.level !== level) return false;
 
-      const start = new Date(d.startDate).getTime();
-      const end = new Date(d.endDate).getTime();
+          const start = new Date(d.startDate).getTime();
+          const end = new Date(d.endDate).getTime();
 
-      return referenceTime >= start && referenceTime < end;
-    });
+          return (
+            Number.isFinite(start) &&
+            Number.isFinite(end) &&
+            referenceTime >= start &&
+            referenceTime < end
+          );
+        });
 
-    const activePratyantar = dashas.find((d) => {
-      if (d.level !== "PRATYANTARDASHA") return false;
+      const activeMahadasha =
+        findActiveDasha("MAHADASHA");
 
-      const start = new Date(d.startDate).getTime();
-      const end = new Date(d.endDate).getTime();
+      const activeAntardasha =
+        findActiveDasha("ANTARDASHA");
 
-      return referenceTime >= start && referenceTime < end;
-    });
+      const activePratyantar =
+        findActiveDasha("PRATYANTARDASHA");
 
-    result.push({
-      year,
-      startDate: new Date(yearStart).toISOString(),
-      endDate: new Date(yearEnd).toISOString(),
-      mahadasha: activeMahadasha?.planet,
-      antardasha: activeAntardasha?.planet,
-      pratyantarDasha: activePratyantar?.planet,
-    });
+      result.push({
+        year,
+        startDate: new Date(segmentStart).toISOString(),
+        endDate: new Date(segmentEnd).toISOString(),
+        mahadasha: activeMahadasha?.planet,
+        antardasha: activeAntardasha?.planet,
+        pratyantarDasha: activePratyantar?.planet,
+      });
+    }
   }
 
   return result;
