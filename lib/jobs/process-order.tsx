@@ -2703,6 +2703,7 @@ ${astrologyBrainPrompt}
 `;
 
 const reportInputText = JSON.stringify(reportInput);
+
 console.log("CURRENT MAHADASHA:", chartForReport.currentMahadasha);
 console.log("CURRENT ANTARDASHA:", chartForReport.currentAntardasha);
 console.log("CURRENT PRATYANTAR:", chartForReport.currentPratyantar);
@@ -2792,6 +2793,49 @@ if (isCompleteLifeReport) {
   for (let i = 0; i < completeLifeSections.length; i++) {
     const section = completeLifeSections[i];
 
+  console.log("\n========== COMPLETE LIFE FULL DEBUG ==========");
+
+// 1. Chart timing calculation
+console.log("\n[1] CHART FUTURE TIMING");
+console.log("COUNT:", chart.futureTiming?.length ?? 0);
+console.log("DATA:", JSON.stringify(chart.futureTiming, null, 2));
+
+// 2. Current Dasha
+console.log("\n[2] CURRENT DASHA");
+console.log("MAHADASHA:", JSON.stringify(chart.currentMahadasha, null, 2));
+console.log("ANTARDASHA:", JSON.stringify(chart.currentAntardasha, null, 2));
+console.log("PRATYANTAR:", JSON.stringify(chart.currentPratyantar, null, 2));
+
+// 3. Report chart data
+console.log("\n[3] CHART FOR REPORT");
+console.log("FUTURE TIMING COUNT:", chartForReport.futureTiming?.length ?? 0);
+console.log("DASHA COUNT:", chartForReport.dashas?.length ?? 0);
+
+// 4. Actual AI input
+console.log("\n[4] REPORT INPUT");
+console.log("SERVICE:", reportInput.serviceSlug);
+console.log("FUTURE TIMING COUNT:", reportInput.astrology?.futureTiming?.length ?? 0);
+console.log("FUTURE TIMING:", JSON.stringify(reportInput.astrology?.futureTiming, null, 2));
+
+// 5. Section assignment
+console.log("\n[5] COMPLETE LIFE SECTIONS");
+console.log("TOTAL SECTIONS:", completeLifeSections.length);
+
+completeLifeSections.forEach((section, index) => {
+  console.log(`SECTION ${index + 1}:`, section.title);
+  console.log("HAS CHAPTER 15:", section.chapters.includes("CHAPTER 15"));
+  console.log("HAS CHAPTER 14:", section.chapters.includes("CHAPTER 14"));
+  console.log("HAS CHAPTER 16:", section.chapters.includes("CHAPTER 16"));
+});
+
+// 6. Prompt construction
+console.log("\n[6] PROMPT CHECK");
+console.log("ENHANCED PROMPT LENGTH:", enhancedPrompt.length);
+console.log("HAS FUTURE TIMING INSTRUCTIONS:", enhancedPrompt.includes("futureTiming"));
+console.log("HAS CHAPTER 15:", enhancedPrompt.includes("CHAPTER 15"));
+
+// 7. End
+console.log("\n========== END COMPLETE LIFE FULL DEBUG ==========\n");
     console.log(
       `COMPLETE LIFE: Generating section ${i + 1}/${completeLifeSections.length}: ${section.title}`
     );
