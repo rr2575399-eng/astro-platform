@@ -2653,6 +2653,19 @@ const reportInput = {
   questions: order.questions,
 };
 
+console.log(
+  "FUTURE TIMING COUNT:",
+  reportInput.astrology?.futureTiming?.length ?? 0
+);
+
+console.log(
+  "FUTURE TIMING DATA:",
+  JSON.stringify(
+    reportInput.astrology?.futureTiming,
+    null,
+    2
+  )
+);
 const brainContext = buildAstrologyBrainContext({
   serviceSlug: normalizedServiceSlug,
   customerQuestion: Array.isArray(order.questions)
