@@ -1,4 +1,18 @@
 const SIGN_LORDS: Record<string, string> = {
+  // Numeric Rashi indexes
+  "0": "Mars",      // Aries
+  "1": "Venus",     // Taurus
+  "2": "Mercury",   // Gemini
+  "3": "Moon",      // Cancer
+  "4": "Sun",       // Leo
+  "5": "Mercury",   // Virgo
+  "6": "Venus",     // Libra
+  "7": "Mars",      // Scorpio
+  "8": "Jupiter",  // Sagittarius
+  "9": "Saturn",   // Capricorn
+  "10": "Saturn",  // Aquarius
+  "11": "Jupiter", // Pisces
+
   // English names
   aries: "Mars",
   taurus: "Venus",
@@ -13,7 +27,7 @@ const SIGN_LORDS: Record<string, string> = {
   aquarius: "Saturn",
   pisces: "Jupiter",
 
-  // Tamil transliteration names
+  // Tamil transliteration
   mesha: "Mars",
   vrishabha: "Venus",
   mithuna: "Mercury",
