@@ -2694,6 +2694,11 @@ console.log(
   JSON.stringify(brainContext.houseLordAnalysis, null, 2)
 );
 
+console.log(
+  "HOUSE ANALYSIS:",
+  JSON.stringify(brainContext.houseAnalysis, null, 2)
+);
+
 const astrologyBrainPrompt =
   createAstrologyBrainPrompt(brainContext);
 
