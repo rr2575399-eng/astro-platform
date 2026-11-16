@@ -2689,6 +2689,11 @@ const brainContext = buildAstrologyBrainContext({
   },
 });
 
+console.log(
+  "HOUSE LORD ANALYSIS:",
+  JSON.stringify(brainContext.houseLordAnalysis, null, 2)
+);
+
 const astrologyBrainPrompt =
   createAstrologyBrainPrompt(brainContext);
 

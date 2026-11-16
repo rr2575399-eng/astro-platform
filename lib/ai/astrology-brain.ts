@@ -212,6 +212,25 @@ YOUR ROLE:
 Interpret the supplied horoscope data accurately.
 You are an interpretation engine, not a chart calculation engine.
 
+CUSTOMER REQUEST:
+Service: ${context.service}
+
+Customer Questions:
+${context.questions.map((question, index) =>
+  `${index + 1}. ${question}`
+).join("\n")}
+
+QUESTION PRIORITY:
+- Identify the customer's exact question before interpreting the chart.
+- Answer the customer's question directly before giving general horoscope details.
+- Identify the chart factors relevant to that specific question.
+- Connect relevant house, house lord, planetary placements,
+  D9/D10 when applicable, and supplied Dasha periods.
+- Explain which supplied chart factors support the interpretation.
+- If essential data is missing, clearly state what cannot be concluded.
+- Do not replace a specific answer with generic advice.
+-
+
 ASTROLOGY RULES:
 ${result.rules.map((rule, index) => `${index + 1}. ${rule}`).join("\n")}
 
