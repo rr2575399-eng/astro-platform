@@ -23,13 +23,44 @@ type Planet = {
   house: number;
 };
 
+const RASHI_NAMES = [
+  "Aries",
+  "Taurus",
+  "Gemini",
+  "Cancer",
+  "Leo",
+  "Virgo",
+  "Libra",
+  "Scorpio",
+  "Sagittarius",
+  "Capricorn",
+  "Aquarius",
+  "Pisces",
+];
+
+function normalizeHouseSign(sign: string): string {
+  const value = sign.trim();
+
+  if (/^\d+$/.test(value)) {
+    const index = Number(value);
+
+    if (index >= 0 && index <= 11) {
+      return RASHI_NAMES[index];
+    }
+  }
+
+  return value;
+}
+
+
+
 export function analyzeHouses(
   houses: House[],
   planets: Planet[]
 ) {
   return houses.map((house) => ({
     house: house.house,
-    sign: house.sign,
+    sign: normalizeHouseSign(house.sign),
     significations: HOUSE_MEANINGS[house.house] ?? [],
     occupants: planets
       .filter((planet) => planet.house === house.house)
