@@ -49,19 +49,65 @@ const DIGNITY_TABLE: Record<
   },
 };
 
+const SIGN_ALIASES: Record<string, string> = {
+  aries: "Mesha",
+  mesha: "Mesha",
+  taurus: "Vrishabha",
+  vrishabha: "Vrishabha",
+  gemini: "Mithuna",
+  mithuna: "Mithuna",
+  cancer: "Karka",
+  karka: "Karka",
+  leo: "Simha",
+  simha: "Simha",
+  virgo: "Kanya",
+  kanya: "Kanya",
+  libra: "Tula",
+  tula: "Tula",
+  scorpio: "Vrischika",
+  vrischika: "Vrischika",
+  sagittarius: "Dhanu",
+  dhanu: "Dhanu",
+  capricorn: "Makara",
+  makara: "Makara",
+  aquarius: "Kumbha",
+  kumbha: "Kumbha",
+  pisces: "Meena",
+  meena: "Meena",
+};
+
+function normalizePlanetName(planet: string): string {
+  const value = planet.trim().toLowerCase();
+
+  return (
+    Object.keys(DIGNITY_TABLE).find(
+      (name) => name.toLowerCase() === value
+    ) ?? ""
+  );
+}
+
+function normalizeSign(sign: string): string {
+  return SIGN_ALIASES[sign.trim().toLowerCase()] ?? "";
+}
+
 export function getPlanetaryDignity(
   planet: string,
   sign: string
 ): PlanetDignity | null {
-  const data = DIGNITY_TABLE[planet];
+  const normalizedPlanet = normalizePlanetName(planet);
+  const normalizedSign = normalizeSign(sign);
 
-  if (!data) return null;
+  if (!normalizedPlanet || !normalizedSign) {
+    return null;
+  }
 
-  if (data.exalted === sign) return "EXALTED";
+  const data = DIGNITY_TABLE[normalizedPlanet];
 
-  if (data.debilitated === sign) return "DEBILITATED";
+  if (data.exalted === normalizedSign) return "EXALTED";
 
-  if (data.ownSigns.includes(sign)) return "OWN_SIGN";
+  if (data.debilitated === normalizedSign) return "DEBILITATED";
+
+  if (data.ownSigns.includes(normalizedSign)) return "OWN_SIGN";
 
   return "OTHER";
 }

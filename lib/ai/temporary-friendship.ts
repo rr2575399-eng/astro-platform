@@ -13,24 +13,50 @@ const SIGNS = [
   "Meena",
 ];
 
+const SIGN_ALIASES: Record<string, string> = {
+  aries: "Mesha",
+  taurus: "Vrishabha",
+  gemini: "Mithuna",
+  cancer: "Karka",
+  leo: "Simha",
+  virgo: "Kanya",
+  libra: "Tula",
+  scorpio: "Vrischika",
+  sagittarius: "Dhanu",
+  capricorn: "Makara",
+  aquarius: "Kumbha",
+  pisces: "Meena",
+};
+
 export type TemporaryRelationship =
   | "FRIEND"
   | "ENEMY";
+
+function normalizeSign(sign: string): string | null {
+  const value = sign.trim().toLowerCase();
+
+  const canonical =
+    SIGN_ALIASES[value] ??
+    SIGNS.find(
+      (item) => item.toLowerCase() === value
+    );
+
+  return canonical ?? null;
+}
 
 export function getTemporaryRelationship(
   planetSign: string,
   otherPlanetSign: string
 ): TemporaryRelationship | null {
-  const firstIndex = SIGNS.indexOf(planetSign);
-  const secondIndex = SIGNS.indexOf(otherPlanetSign);
+  const normalizedFirst = normalizeSign(planetSign);
+  const normalizedSecond = normalizeSign(otherPlanetSign);
 
-  if (firstIndex === -1 || secondIndex === -1) {
+  if (!normalizedFirst || !normalizedSecond) {
     return null;
   }
 
-  if (firstIndex === secondIndex) {
-    return "ENEMY";
-  }
+  const firstIndex = SIGNS.indexOf(normalizedFirst);
+  const secondIndex = SIGNS.indexOf(normalizedSecond);
 
   const distance =
     (secondIndex - firstIndex + 12) % 12 + 1;
@@ -48,10 +74,10 @@ export function analyzeTemporaryFriendships(
     sign: string;
   }[]
 ) {
-  return planets.map((planet) => ({
+  return planets.map((planet, index) => ({
     planet: planet.planet,
     relationships: planets
-      .filter((other) => other.planet !== planet.planet)
+      .filter((_, otherIndex) => otherIndex !== index)
       .map((other) => ({
         otherPlanet: other.planet,
         relationship: getTemporaryRelationship(
