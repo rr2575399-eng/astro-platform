@@ -1458,6 +1458,10 @@ console.log(JSON.stringify(kundli?.vargas?.d9, null, 2));
 console.log("========== D10 DASAMSA ==========");
 console.log(JSON.stringify(kundli?.vargas?.d10, null, 2));
 const futureTiming = buildFiveYearTiming(dashas);
+console.log(
+  "FIVE YEAR TIMING TEST:",
+  JSON.stringify(futureTiming, null, 2)
+);
 return {
   ascendant,
   ascendantLord,
